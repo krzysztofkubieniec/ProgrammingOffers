@@ -2,32 +2,47 @@ package pl.kubieniec.service;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.kubieniec.model.Role;
 import pl.kubieniec.model.User;
+import pl.kubieniec.repository.RoleRepository;
 import pl.kubieniec.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Transactional
+@Component
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    public void save(User user){
-        String password = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
+    @Autowired
+    private RoleRepository roleRepository;
+
+    public void save(User user) {
+        String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(password);
         user.setCreated(LocalDateTime.now());
+        List<Role> roles = user.getRoles();
+        roles.add(roleRepository.findOne(1L));
+        user.setRoles(roles);
         userRepository.save(user);
-    }
-    public Boolean exists(String login, String password) {
-        User user = userRepository.findUserByLogin(login);
-        String hashed = user.getPassword();
-        if (BCrypt.checkpw(password, hashed)) {
-            System.out.println("Ok");
-        } else {
-            System.out.println("It does not match");
-        }
+//        userRepository.insertUserRole(user.getId());
     }
 
+    public Boolean login(String login, String password) {
+        User user = userRepository.findUserByLogin(login);
+        if (user != null) {
+            String hashed = user.getPassword();
+            if (BCrypt.checkpw(password, hashed)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
+

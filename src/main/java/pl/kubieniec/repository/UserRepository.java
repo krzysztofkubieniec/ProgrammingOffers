@@ -1,9 +1,8 @@
 package pl.kubieniec.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import pl.kubieniec.model.User;
-
-import java.awt.print.Book;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 

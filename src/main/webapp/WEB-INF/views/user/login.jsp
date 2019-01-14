@@ -11,10 +11,11 @@
     <title>Login</title>
 </head>
 <body>
-<form>
-    <input type="text" placeholder="podaj login">
-    <input type="password" placeholder="podaj hasło">
-    <input type="submit" value="Wyślij">
+<form method="post">
+    <input name="login" type="text" placeholder="podaj login"><br>
+    <input name="password" type="password" placeholder="podaj hasło"><br>
+    ${error}
+    <input type="submit" value="Wyślij"><br>
 </form>
 </body>
 </html>
