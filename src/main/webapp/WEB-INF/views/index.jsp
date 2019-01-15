@@ -5,7 +5,8 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="<c:url value="/resources/css/index.css"/>" rel="stylesheet" type="text/css"/>
     <title>Title</title>
 </head>
@@ -28,11 +29,25 @@
                             <div class="o-cl-i-c-header">
                                 <h3><span><a href="#" class="title pull-left">${order.title}</a></span></h3>
                                 <ul class="list-inline">
-                                    <li class="list-inline-item">dodano <fmt:formatDate dateStyle="medium"
-                                                                                        timeStyle="short" type="both"
-                                                                                        value="${order.created}"/></li>
+                                    <li class="list-inline-item">
+                                        <div><i class="far fa-calendar-alt"></i> dodano <fmt:formatDate
+                                                dateStyle="medium"
+                                                timeStyle="short" type="both"
+                                                value="${order.created}"/></div>
+                                    </li>
 
-                                    <li class="list-inline-item red"><span class="red"> do końca ${order.hoursTillEnd} godziny</span>
+                                    <li class="list-inline-item">
+                                        <div><i class="far fa-bell"></i>
+                                            <c:choose>
+                                            <c:when test="${order.hoursTillEnd == 1}"><span class="red"> do końca 1 godzina</c:when>
+                                                <c:when test="${order.hoursTillEnd > 1 && order.hoursTillEnd <= 24 }"><span
+                                                        class="red"> do końca ${order.hoursTillEnd} godziny</c:when>
+                                                    <c:when test="${order.hoursTillEnd > 24}"><span>koniec <fmt:formatDate
+                                                            dateStyle="medium"
+                                                            timeStyle="short" type="both"
+                                                            value="${order.end}"/></c:when>
+                                                        </c:choose></span>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -43,10 +58,10 @@
                                 Złóż ofertę
                             </a>
                         </div>
-                        <div class="o-cl-i-c-description row col-md-11">
+                        <div class="o-cl-i-c-description col-md-11">
                             <div class="content">
-                                    ${order.content}
-                                    <%--<button class="btn btn-link rfp-show-details">Pokaż więcej <i class="fa fa-angle-right"></i></button>--%>
+                                    ${order.shortenContent}
+                                    <a href="#" class="btn btn-link rfp-show-details">Pokaż więcej <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>

@@ -9,4 +9,10 @@
 
 .content {
     word-wrap: break-word;
+    font-size: 15px;
+    color: darkgrey;
+}
+
+.content a{
+    font-size: 15px;
 }

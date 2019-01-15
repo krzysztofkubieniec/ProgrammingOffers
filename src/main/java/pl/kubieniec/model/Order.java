@@ -83,4 +83,13 @@ public class Order {
         return 0;
     }
 
+    public String getShortenContent() {
+        if (content.length() > 100) {
+            String text = content;
+            text = text.substring(0, 100) + " ...";
+            return text;
+        }
+        return content;
+    }
+
 }
