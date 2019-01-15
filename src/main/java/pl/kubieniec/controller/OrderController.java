@@ -45,7 +45,6 @@ public class OrderController {
         }
         String login = (String) session.getAttribute("login");
         orderService.save(order, login);
-        return "/";
+        return "redirect:/";
     }
-
 }

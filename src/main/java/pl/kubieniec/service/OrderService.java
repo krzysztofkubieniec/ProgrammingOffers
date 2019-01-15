@@ -10,6 +10,8 @@ import pl.kubieniec.repository.OrderRepository;
 import pl.kubieniec.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 @Transactional
 @Component
@@ -22,9 +24,21 @@ public class OrderService {
     private UserRepository userRepository;
 
     public void save(Order order, String login) {
-//        order.setCreated(LocalDateTime.now());
-//        User user = userRepository.findUserByLogin(login);
-//        order.setEmployer(user);
+        Calendar nowCalendar = Calendar.getInstance();
+        Date now = nowCalendar.getTime();
+        order.setCreated(now);
+
+        Date end = order.getEnd();
+        Calendar endCalendar = Calendar.getInstance();
+        endCalendar.setTime(end);
+        endCalendar.set(Calendar.HOUR, nowCalendar.get(Calendar.HOUR));
+        endCalendar.set(Calendar.MINUTE, nowCalendar.get(Calendar.MINUTE));
+        endCalendar.set(Calendar.SECOND, nowCalendar.get(Calendar.SECOND));
+        end = endCalendar.getTime();
+        order.setEnd(end);
+
+        User user = userRepository.findUserByLogin(login);
+        order.setEmployer(user);
         orderRepository.save(order);
     }
 }

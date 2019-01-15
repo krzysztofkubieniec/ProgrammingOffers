@@ -26,9 +26,6 @@ public class UserService {
         String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(password);
         user.setCreated(LocalDateTime.now());
-        List<Role> roles = user.getRoles();
-        roles.add(roleRepository.findOne(1L));
-        user.setRoles(roles);
         userRepository.save(user);
     }
 

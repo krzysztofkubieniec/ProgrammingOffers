@@ -54,5 +54,5 @@ public class User {
     private String phoneNumber;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 }

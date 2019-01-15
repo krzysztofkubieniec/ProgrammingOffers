@@ -11,8 +11,8 @@ Nazwa:<br>
 <form:errors path="title"/><br>
 
 Tekst: <br>
-<form:textarea rows="30" cols="80" path="text"/><br>
-<form:errors path="text"/><br>
+<form:textarea rows="30" cols="80" path="content"/><br>
+<form:errors path="content"/><br>
 
 Data zakończenia: <br>
 <form:input type="date" path="end"/><br>
