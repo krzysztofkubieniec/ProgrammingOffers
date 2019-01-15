@@ -24,7 +24,7 @@
             <ul class="list-group o-list-with-meta">
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="o-cl-i-contents col-xs-12 f">
+                        <div class="o-cl-i-contents col-10">
                             <div class="o-cl-i-c-header">
                                 <h3><span><a href="#" class="title pull-left">${order.title}</a></span></h3>
                                 <ul class="list-inline">
@@ -32,23 +32,21 @@
                                                                                         timeStyle="short" type="both"
                                                                                         value="${order.created}"/></li>
 
-                                    <li class="list-inline-item red"><span class="red"> do końca ${order.end}</span>
+                                    <li class="list-inline-item red"><span class="red"> do końca ${order.hoursTillEnd} godziny</span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="o-cl-i-c-meta-date">
+                        <div class="o-cl-i-c-meta-date col-2">
                             <a class="btn btn-lg btn-primary btn-main-action btn-uncover-from-list"
-                               href="/rfp/2264207_Potrzebna-firma-remontowa-21-40m2-Lodz.html?rfpUncover=uncover">
+                               href="#">
                                 Złóż ofertę
                             </a>
                         </div>
                         <div class="o-cl-i-c-description row col-md-11">
-                            <div class="description-author">
-                                <p data-overflow="false">
-                                        ${order.content}
-                                        <%--<button class="btn btn-link rfp-show-details">Pokaż więcej <i class="fa fa-angle-right"></i></button>--%>
-                                </p>
+                            <div class="content">
+                                    ${order.content}
+                                    <%--<button class="btn btn-link rfp-show-details">Pokaż więcej <i class="fa fa-angle-right"></i></button>--%>
                             </div>
                         </div>
                     </div>

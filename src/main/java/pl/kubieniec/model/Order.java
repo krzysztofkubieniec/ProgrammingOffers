@@ -1,6 +1,7 @@
 package pl.kubieniec.model;
 
 import lombok.Data;
+import lombok.Getter;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -45,4 +47,40 @@ public class Order {
 
     @ManyToMany
     private List<Category> categories;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public void setEmployer(User employer) {
+        this.employer = employer;
+    }
+
+    public void setExecutor(User executor) {
+        this.executor = executor;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public int getHoursTillEnd() {
+        if (end != null) {
+            return (int) ((end.getTime() - Calendar.getInstance().getTime().getTime()) / (1000 * 60 * 60));
+        }
+        return 0;
+    }
+
 }

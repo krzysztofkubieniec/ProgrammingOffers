@@ -14,11 +14,11 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private OrderService orderService;
 
     @ModelAttribute("orders")
     public List<Order> findTop10() {
-        return orderRepository.findTop10ByOrderByEndDesc();
+        return orderService.findTop10();
 
     }
 

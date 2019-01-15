@@ -6,3 +6,7 @@
 .red {
     color: red;
 }
+
+.content {
+    word-wrap: break-word;
+}
