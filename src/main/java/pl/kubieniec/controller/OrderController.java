@@ -21,8 +21,6 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
-
-
     @Autowired
     private OrderService orderService;
 
@@ -46,7 +44,7 @@ public class OrderController {
             return "/order/create-order";
         }
         String login = (String) session.getAttribute("login");
-        orderService.save(order,login);
+        orderService.save(order, login);
         return "/";
     }
 

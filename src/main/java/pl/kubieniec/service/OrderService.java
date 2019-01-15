@@ -22,9 +22,9 @@ public class OrderService {
     private UserRepository userRepository;
 
     public void save(Order order, String login) {
-        order.setCreated(LocalDateTime.now());
-        User user = userRepository.findUserByLogin(login);
-        order.setEmployer(user);
+//        order.setCreated(LocalDateTime.now());
+//        User user = userRepository.findUserByLogin(login);
+//        order.setEmployer(user);
         orderRepository.save(order);
     }
 }

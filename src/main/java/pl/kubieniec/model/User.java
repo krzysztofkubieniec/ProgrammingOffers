@@ -3,6 +3,7 @@ package pl.kubieniec.model;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import pl.kubieniec.repository.RoleRepository;
 import pl.kubieniec.validate.DetailUserInfo;
 
 import javax.persistence.*;
@@ -53,5 +54,5 @@ public class User {
     private String phoneNumber;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles;
 }

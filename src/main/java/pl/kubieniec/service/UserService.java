@@ -30,7 +30,6 @@ public class UserService {
         roles.add(roleRepository.findOne(1L));
         user.setRoles(roles);
         userRepository.save(user);
-//        userRepository.insertUserRole(user.getId());
     }
 
     public Boolean login(String login, String password) {
