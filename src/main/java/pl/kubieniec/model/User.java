@@ -32,6 +32,7 @@ public class User {
 
     @Column(nullable = false)
     @Email
+    @NotBlank
     private String email;
 
     @Column(nullable = false)

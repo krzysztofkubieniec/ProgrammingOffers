@@ -2,6 +2,8 @@ package pl.kubieniec.model;
 
 import lombok.Data;
 import lombok.Getter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,7 +29,7 @@ public class Order {
     @NotBlank
     private String title;
 
-    @Size(min = 2, max = 2000)
+    @Size(min = 2, max = 5000)
     @NotBlank
     private String content;
 
@@ -45,36 +47,12 @@ public class Order {
     @JoinColumn(name = "executor_id")
     private User executor;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public void setEmployer(User employer) {
-        this.employer = employer;
-    }
-
-    public void setExecutor(User executor) {
-        this.executor = executor;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)// ZAPYTAĆ MARCINA JAK NIE ROBIĆ EAGER
+    private List<ProgrammingLanguage> programmingLanguages;
 
     public int getHoursTillEnd() {
         if (end != null) {
@@ -84,12 +62,11 @@ public class Order {
     }
 
     public String getShortenContent() {
-        if (content.length() > 100) {
+        if (content.length() > 500) {
             String text = content;
-            text = text.substring(0, 100) + " ...";
+            text = text.substring(0, 500) + " ...";
             return text;
         }
         return content;
     }
-
 }

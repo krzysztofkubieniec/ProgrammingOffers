@@ -1,6 +1,7 @@
 package pl.kubieniec.app;
 
 import converter.CategoryConverter;
+import converter.ProgrammingLanguageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -59,11 +60,16 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(getCategoryConverter());
-
+        registry.addConverter(getProgrammingLanguageConverter());
     }
     @Bean
     public CategoryConverter getCategoryConverter() {
         return new CategoryConverter();
+    }
+
+    @Bean
+    public ProgrammingLanguageConverter getProgrammingLanguageConverter() {
+        return new ProgrammingLanguageConverter();
     }
 
     @Bean(name="localeResolver")

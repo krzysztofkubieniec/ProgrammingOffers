@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.kubieniec.model.Category;
 import pl.kubieniec.model.Order;
+import pl.kubieniec.model.ProgrammingLanguage;
 import pl.kubieniec.repository.CategoryRepository;
 import pl.kubieniec.repository.OrderRepository;
+import pl.kubieniec.repository.ProgrammingLanguageRepository;
 import pl.kubieniec.service.OrderService;
 
 import javax.servlet.http.HttpSession;
@@ -27,9 +29,17 @@ public class OrderController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProgrammingLanguageRepository programmingLanguageRepository;
+
     @ModelAttribute("categories")
     private List<Category> getCategories() {
         return categoryRepository.findAll();
+    }
+
+    @ModelAttribute("programmingLanguages")
+    private List<ProgrammingLanguage> getProgrammingLanguages() {
+        return programmingLanguageRepository.findAll();
     }
 
     @RequestMapping(value = "/create-order", method = RequestMethod.GET)
