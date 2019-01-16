@@ -1,3 +1,5 @@
+ALTER DATABASE programming_offers DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
 INSERT INTO `category` VALUES (1,'','Strony internetowe'),(2,'','Serwisy, portale'),(3,'','Bazy danych'),(4,'','Grafika komputerowa'),(5,'','Pozycjonowanie stron');
 
 INSERT INTO `role` VALUES (1,'Contractor with permission to add offers','contractor'),(2,'','admin');
