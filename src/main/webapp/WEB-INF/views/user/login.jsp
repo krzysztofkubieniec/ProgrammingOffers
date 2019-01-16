@@ -14,22 +14,28 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<div class="row">
-    <div class="mx-auto mt-5">
-        <form method="post">
-            <div class="form-group">
-                <label for="login">Login:</label>
-                <input id="login" name="login" type="text" placeholder="podaj login">
-            </div>
-            <div class="form-group">
-                <label for="password">Hasło:</label>
-                <input id="password" name="password" type="password" placeholder="podaj hasło">
-            </div>
-            <input class="btn btn-primary" type="submit" value="Wyślij">
-            <div class="form-group">
-                ${error}
-            </div>
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="mx-auto p-5 my-5 bg-light">
+            <form method="post">
+                <div class="form-group">
+                    <label for="login">Login:</label>
+                    <input class="form-control" id="login" name="login" type="text" placeholder="podaj login">
+                </div>
+                <div class="form-group">
+                    <label for="password">Hasło:</label>
+                    <input class="form-control" id="password" name="password" type="password" placeholder="podaj hasło">
+                </div>
+                <div class="row">
+                    <div class="mx-auto">
+                        <input class="btn btn-primary" type="submit" value="Wyślij">
+                    </div>
+                </div>
+                <div class="form-group">
+                    ${error}
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </body>

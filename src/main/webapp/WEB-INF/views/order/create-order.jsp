@@ -8,23 +8,47 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<form:form modelAttribute="order" method="post">
-    Nazwa:<br>
-    <form:input path="title"/><br>
-    <form:errors path="title"/><br>
+<div class="container">
+    <div class="row">
+        <div class="mx-auto p-5 my-5 bg-light">
+            <form:form modelAttribute="order" method="post">
+            <div class="form-group">
+                <label>Tytuł:</label>
+                <form:input cssClass="form-control" path="title"/>
+                <form:errors path="title"/>
 
-    Tekst: <br>
-    <form:textarea rows="30" cols="80" path="content"/><br>
-    <form:errors path="content"/><br>
+                <label>Tekst:</label>
+                <form:textarea cssClass="form-control" rows="15" cols="80" path="content"/>
+                <form:errors path="content"/>
+            </div>
+            <div class="form-group col-4">
+                <label>Data zakończenia:</label>
+                <form:input cssClass="form-control" type="date" path="end"/><br>
+                <form:errors path="end"/><br>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label>Podaj kategorie:</label>
+                    <form:select cssClass="form-control" path="categories" items="${categories}" itemLabel="name"
+                                 itemValue="id"></form:select>
+                </div>
+                <div class="form-group col-6">
+                    <label>Podaj technologie:</label>
+                    <form:select cssClass="form-control" path="programmingLanguages" items="${programmingLanguages}"
+                                 itemLabel="name"
+                                 itemValue="id"></form:select>
+                </div>
+            </div>
 
-    Data zakończenia: <br>
-    <form:input type="date" path="end"/><br>
-    <form:errors path="end"/><br>
-
-    Kategorie : <br> <form:select path="categories" items="${categories}" itemLabel="name" itemValue="id"></form:select><br>
-
-    Technologie : <br> <form:select path="programmingLanguages" items="${programmingLanguages}" itemLabel="name" itemValue="id"></form:select><br>
-    <input type="submit" value="Wyślij"/>
-</form:form>
+            <div class="row">
+                <div class="mx-auto">
+                    <input type="submit" class="btn btn-primary" value="Wyślij"/>
+                </div>
+            </div>
+        </div>
+        </form:form>
+    </div>
+</div>
+</div>
 </body>
 </html>

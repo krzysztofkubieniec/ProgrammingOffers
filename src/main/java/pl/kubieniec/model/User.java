@@ -39,11 +39,11 @@ public class User {
     private LocalDateTime created;
 
     @Column(name = "first_name")
-    @NotBlank(groups = DetailUserInfo.class)
+    @NotBlank
     private String firstName;
 
     @Column(name = "last_name")
-    @NotBlank(groups = DetailUserInfo.class)
+    @NotBlank
     private String lastName;
 
     @Column(name = "about_me")
@@ -51,7 +51,7 @@ public class User {
     private String aboutMe;
 
     @Column(name = "phone_number")
-    @NotBlank(groups = DetailUserInfo.class)
+    @NotBlank
     private String phoneNumber;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})

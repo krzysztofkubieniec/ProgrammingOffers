@@ -59,4 +59,9 @@ public class UserController {
         session.setAttribute("login", "");
         return "redirect:/";
     }
+
+    @RequestMapping("/dashboard")
+    public String dashboard() {
+        return "/user/dashboard";
+    }
 }

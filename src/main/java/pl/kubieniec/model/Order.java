@@ -25,7 +25,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2, max = 50)
+    @Size(min = 2, max = 100)
     @NotBlank
     private String title;
 
