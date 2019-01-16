@@ -23,7 +23,7 @@ public class OrderService {
     private UserRepository userRepository;
 
     public List<Order> findTop10() {
-        return orderRepository.findTop10ByOrderByEndAsc();
+        return orderRepository.findTop10ByEndAfterOrderByEndAsc(new Date());
     }
 
     public void save(Order order, String login) {
@@ -41,6 +41,10 @@ public class OrderService {
         User user = userRepository.findUserByLogin(login);
         order.setEmployer(user);
         orderRepository.save(order);
+    }
+
+    public List<Order> findActiveOrdersByUser(User user) {
+        return orderRepository.findAllByEndAfterAndEmployerOrderByEndAsc(new Date(),user);
     }
 }
 

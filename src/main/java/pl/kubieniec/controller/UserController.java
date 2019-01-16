@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.kubieniec.model.User;
 import pl.kubieniec.repository.UserRepository;
+import pl.kubieniec.service.OrderService;
 import pl.kubieniec.service.UserService;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +20,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(value = "/create-account", method = RequestMethod.GET)
     public String save(Model model) {
@@ -61,7 +62,9 @@ public class UserController {
     }
 
     @RequestMapping("/dashboard")
-    public String dashboard() {
+    public String dashboard(@SessionAttribute String login, Model model) {
+        User user = userService.findUserByLogin(login);
+        model.addAttribute("activeOrders",orderService.findActiveOrdersByUser(user));
         return "/user/dashboard";
     }
 }

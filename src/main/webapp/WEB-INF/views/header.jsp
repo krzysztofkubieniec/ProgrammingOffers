@@ -30,7 +30,7 @@
                 </li>
                 <c:if test="${not empty login}">
                     <li class="nav-item active">
-                        <a class="red nav-link" href="#">Witaj ${login}!</a>
+                        <a class="red nav-link" href="/user/dashboard">Witaj ${login}!</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="/user/logout">Wyloguj</a>

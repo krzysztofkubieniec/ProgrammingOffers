@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public Boolean login(String login, String password) {
-        User user = userRepository.findUserByLogin(login);
+        User user = findUserByLogin(login);
         if (user != null) {
             String hashed = user.getPassword();
             if (BCrypt.checkpw(password, hashed)) {
@@ -38,6 +38,10 @@ public class UserService {
             }
         }
         return false;
+    }
+
+    public User findUserByLogin(String login) {
+        return userRepository.findUserByLogin(login);
     }
 }
 
