@@ -79,7 +79,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-10">
-                                        <h3><span><a href="#" class="title">${order.title}</a></span></h3>
+                                        <h3><span><a href="/order/show/${order.id}" class="title">${order.title}</a></span></h3>
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <div><i class="far fa-calendar-alt"></i> dodano <fmt:formatDate
