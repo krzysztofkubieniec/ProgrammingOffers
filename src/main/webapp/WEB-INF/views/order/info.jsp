@@ -77,24 +77,19 @@
         <div class="text-justify w-75 mx-auto rounded-custom bg-light p-3">
             <span>${order.content}</span>
         </div>
-
     </div>
-
 </div>
+<c:forEach items="${offers}" var="offer">
+    <div class="container">
+        <div class="mx-auto p-3 my-5 text-center bg-light rounded-custom">
+            ${offer.price}<br>
+            ${offer.message}
+        </div>
+    </div>
+</c:forEach>
 <div id="offer" class="container">
     <div class="mx-auto p-3 my-5 text-center bg-light rounded-custom">
-        <form>
-            <div class="form-group">
-                
-            </div>
-        </form>
-    </div>
-</div>
-<div class="container">
-    <div class="text-center">
-        <button class="btn btn-lg btn-primary offer-slider">
-            Złóż ofertę
-        </button>
+        <%@ include file="../offer/create-offer.jsp" %>
     </div>
 </div>
 <script src="<c:url value="/resources/js/app.js" />"></script>

@@ -7,11 +7,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kubieniec.model.Category;
+import pl.kubieniec.model.Offer;
 import pl.kubieniec.model.Order;
 import pl.kubieniec.model.ProgrammingLanguage;
 import pl.kubieniec.repository.CategoryRepository;
+import pl.kubieniec.repository.OfferRepository;
 import pl.kubieniec.repository.OrderRepository;
 import pl.kubieniec.repository.ProgrammingLanguageRepository;
+import pl.kubieniec.service.OfferService;
 import pl.kubieniec.service.OrderService;
 import pl.kubieniec.service.UserService;
 import pl.kubieniec.validate.CreatingAndUpdateingOrder;
@@ -26,7 +29,7 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
-    private UserService userService;
+    private OfferRepository offerRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -91,7 +94,10 @@ public class OrderController {
 
     @RequestMapping("/show/{id}")
     public String show(@PathVariable Long id, Model model) {
-        model.addAttribute("order",orderRepository.findOne(id));
+        Order order = orderRepository.findOne(id);
+        model.addAttribute("order",order);
+        model.addAttribute("offer",new Offer());
+        model.addAttribute("offers",offerRepository.findAllByOrder(order));
         return "/order/info";
     }
 }
