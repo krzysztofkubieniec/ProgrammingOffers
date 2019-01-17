@@ -88,4 +88,10 @@ public class OrderController {
         }
         return "redirect:/user/dashboard";
     }
+
+    @RequestMapping("/show/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        model.addAttribute("order",orderRepository.findOne(id));
+        return "/order/info";
+    }
 }

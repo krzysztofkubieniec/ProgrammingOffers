@@ -35,8 +35,7 @@
                 <div class="form-group col-6">
                     <label>Podaj technologie:</label>
                     <form:select cssClass="form-control" path="programmingLanguages" items="${programmingLanguages}"
-                                 itemLabel="name"
-                                 itemValue="id"></form:select>
+                                 itemLabel="name" itemValue="id"></form:select>
                 </div>
             </div>
             <div class="row">

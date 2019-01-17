@@ -41,7 +41,8 @@ public class OrderService {
     }
 
     public void end(Long id) {
-        orderRepository.findOne(id).setEnd(Calendar.getInstance().getTime());
+        Long time = Calendar.getInstance().getTime().getTime()-1000;
+        orderRepository.findOne(id).setEnd(new Date(time));
     }
 
     public List<Order> findActiveOrdersByUser(User user) {

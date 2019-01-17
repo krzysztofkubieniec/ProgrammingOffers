@@ -31,4 +31,13 @@ body {
     color: grey;
 }
 
+.details-bg {
+    font-size: 13px;
+
+}
+
+.rounded-custom {
+    border-radius:.50rem!important
+}
+
 

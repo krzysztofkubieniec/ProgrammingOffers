@@ -116,7 +116,7 @@
                             </div>
                             <div class="o-cl-i-c-meta-date col-2">
                                 <a class="btn btn-lg btn-primary btn-main-action btn-uncover-from-list"
-                                   href="#">
+                                   href="/order/show/${order.id}">
                                     Złóż ofertę
                                 </a>
                             </div>
