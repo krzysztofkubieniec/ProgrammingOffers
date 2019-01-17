@@ -11,18 +11,18 @@
 <%@ include file="../header.jsp" %>
 <div class="mt-5">
 </div>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-6 orders">
-            <header class="container text-center">
+            <header class="text-center">
                 <h2 class="h1">Aktywne zlecenia</h2>
             </header>
-            <ul class="list-group o-list-container container">
+            <ul class="list-group">
                 <c:forEach var="order" items="${activeOrders}">
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="o-cl-i-contents col-10">
-                                <div class="o-cl-i-c-header">
+                    <li class="list-group-item m-1 rounded-custom">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-10 pt-2">
                                     <h3><span><a href="#" class="title pull-left">${order.title}</a></span></h3>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
@@ -54,35 +54,36 @@
                                                     value="${order.updated}"/></p>
                                         </div>
                                     </c:if>
-                                </div>
-                            </div>
-                            <div class="o-cl-i-c-meta-date col-2">
-                                <a class="btn btn-lg btn-warning btn-sm"
-                                   href="/order/edit/${order.id}">
-                                    Edytuj
-                                </a>
-                                <a class="btn btn-lg btn-danger btn-sm mt-1"
-                                   href="/order/end/${order.id}">
-                                    Zakończ
-                                </a>
-                            </div>
-                            <div class="o-cl-i-c-description col-md-11">
-                                <div class="content">
-                                        ${order.shortenContent}
-                                    <a href="#" class="btn btn-link rfp-show-details">Pokaż więcej <i
-                                            class="fa fa-angle-right"></i></a>
-                                </div>
-                                <div class="details">
-                                    <div>
-                                        Kategorie:
-                                        <c:forEach items="${order.categories}" var="category">
-                                            ${category.name} </c:forEach>
-                                    </div>
-                                    <div>
-                                        Technologie:
-                                        <c:forEach items="${order.programmingLanguages}" var="language">
-                                            ${language.name} </c:forEach>
 
+                                </div>
+                                <div class="col-2">
+                                    <a class="btn btn-warning btn-sm"
+                                       href="/order/edit/${order.id}">
+                                        Edytuj
+                                    </a>
+                                    <a class="btn btn-danger btn-sm mt-2"
+                                       href="/order/end/${order.id}">
+                                        Zakończ
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <div class="content text-justify">
+                                            ${order.shortenContent}
+                                        <a href="#" class="btn btn-link rfp-show-details">Pokaż więcej <i
+                                                class="fa fa-angle-right"></i></a>
+                                    </div>
+                                    <div class="details">
+                                        <div>
+                                            Kategorie:
+                                            <c:forEach items="${order.categories}" var="category">
+                                                ${category.name} </c:forEach>
+                                        </div>
+                                        <div>
+                                            Technologie:
+                                            <c:forEach items="${order.programmingLanguages}" var="language">
+                                                ${language.name} </c:forEach>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -92,15 +93,15 @@
             </ul>
         </div>
         <div class="col-6 orders">
-            <header class="container text-center">
-                <h2 class="h1">Zakończone zlecenia</h2>
+            <header class="text-center">
+                <h2 class="h1">Nieaktywne zlecenia</h2>
             </header>
-            <ul class="list-group o-list-container container">
+            <ul class="list-group">
                 <c:forEach var="order" items="${nonActiveOrders}">
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="o-cl-i-contents col-10">
-                                <div class="o-cl-i-c-header">
+                    <li class="list-group-item m-1 rounded-custom">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-10 pt-2">
                                     <h3><span><a href="#" class="title pull-left">${order.title}</a></span></h3>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
@@ -111,10 +112,16 @@
                                         </li>
                                         <li class="list-inline-item">
                                             <div><i class="far fa-bell"></i>
-                                                <span>koniec <fmt:formatDate
-                                                        dateStyle="medium"
-                                                        timeStyle="short" type="both"
-                                                        value="${order.end}"/></span>
+                                                <c:choose>
+                                                    <c:when test="${order.hoursTillEnd == 1}"><span
+                                                            class="red"> do końca 1 godzina</span></c:when>
+                                                    <c:when test="${order.hoursTillEnd > 1 && order.hoursTillEnd <= 24 }"><span
+                                                            class="red"> do końca ${order.hoursTillEnd} godziny</span></c:when>
+                                                    <c:when test="${order.hoursTillEnd > 24}"><span>koniec <fmt:formatDate
+                                                            dateStyle="medium"
+                                                            timeStyle="short" type="both"
+                                                            value="${order.end}"/></span></c:when>
+                                                </c:choose>
                                             </div>
                                         </li>
                                     </ul>
@@ -126,31 +133,32 @@
                                                     value="${order.updated}"/></p>
                                         </div>
                                     </c:if>
-                                </div>
-                            </div>
-                            <div class="o-cl-i-c-meta-date col-2">
-                                <a class="btn btn-success btn-sm"
-                                   href="#">
-                                    Wystaw ponownie
-                                </a>
-                            </div>
-                            <div class="o-cl-i-c-description col-md-11">
-                                <div class="content">
-                                        ${order.shortenContent}
-                                    <a href="#" class="btn btn-link rfp-show-details">Pokaż więcej <i
-                                            class="fa fa-angle-right"></i></a>
-                                </div>
-                                <div class="details">
-                                    <div>
-                                        Kategorie:
-                                        <c:forEach items="${order.categories}" var="category">
-                                            ${category.name} </c:forEach>
-                                    </div>
-                                    <div>
-                                        Technologie:
-                                        <c:forEach items="${order.programmingLanguages}" var="language">
-                                            ${language.name} </c:forEach>
 
+                                </div>
+                                <div class="col-2">
+                                    <a class="btn btn-success btn-sm"
+                                       href="#">
+                                        Wystaw ponownie
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <div class="content text-justify">
+                                            ${order.shortenContent}
+                                        <a href="#" class="btn btn-link rfp-show-details">Pokaż więcej <i
+                                                class="fa fa-angle-right"></i></a>
+                                    </div>
+                                    <div class="details">
+                                        <div>
+                                            Kategorie:
+                                            <c:forEach items="${order.categories}" var="category">
+                                                ${category.name} </c:forEach>
+                                        </div>
+                                        <div>
+                                            Technologie:
+                                            <c:forEach items="${order.programmingLanguages}" var="language">
+                                                ${language.name} </c:forEach>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
