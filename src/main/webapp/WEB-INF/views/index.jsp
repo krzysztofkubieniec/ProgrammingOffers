@@ -59,7 +59,8 @@
 
                         <c:forEach items="${programmingLanguages}" var="item">
                             <div class="form-group ml-1">
-                                <input class="form-check-input" type="checkbox" value="">
+                                <input class="form-check-input" type="checkbox" value=""
+                                       <c:if test="fn:contains(selectedProgrammingLanguages, item)">checked="checked"</c:if>>
                                 <label class="form-check-label">
                                         ${item.name}
                                 </label>
@@ -103,6 +104,14 @@
                                             </div>
                                         </li>
                                     </ul>
+                                    <c:if test="${not empty order.updated}">
+                                    <div class="details">
+                                        <p>Zaktualizowano: <fmt:formatDate
+                                                dateStyle="medium"
+                                                timeStyle="short" type="both"
+                                                value="${order.updated}"/></p>
+                                    </div>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="o-cl-i-c-meta-date col-2">

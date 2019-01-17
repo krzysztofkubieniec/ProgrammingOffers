@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import pl.kubieniec.model.Category;
 import pl.kubieniec.model.Order;
 import pl.kubieniec.model.ProgrammingLanguage;
@@ -14,9 +13,9 @@ import pl.kubieniec.repository.CategoryRepository;
 import pl.kubieniec.repository.OrderRepository;
 import pl.kubieniec.repository.ProgrammingLanguageRepository;
 import pl.kubieniec.service.OrderService;
+import pl.kubieniec.service.UserService;
+import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -27,7 +26,13 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     @Autowired
     private ProgrammingLanguageRepository programmingLanguageRepository;
@@ -49,12 +54,38 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/create-order", method = RequestMethod.POST)
-    public String add(@Valid Order order, BindingResult result, HttpSession session) {
+    public String add(@Validated({CreatingAndUpdateingOrder.class}) Order order, BindingResult result, @SessionAttribute String login) {
         if (result.hasErrors()) {
             return "/order/create-order";
         }
-        String login = (String) session.getAttribute("login");
         orderService.save(order, login);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String update(@SessionAttribute String login, @PathVariable Long id, Model model) {
+        if (orderService.validateOrderByUser(login, id)) {
+            Order order = orderRepository.findOne(id);
+            model.addAttribute("order", order);
+            return "/order/create-order";
+        }
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    public String update(@Validated({CreatingAndUpdateingOrder.class}) Order order, BindingResult result) {
+        if (result.hasErrors()) {
+            return "/order/create-order";
+        }
+        orderService.update(order);
+        return "redirect:/user/dashboard";
+    }
+
+    @RequestMapping(value = "/end/{id}")
+    public String update(@PathVariable Long id, @SessionAttribute String login) {
+        if (orderService.validateOrderByUser(login, id)) {
+            orderService.end(id);
+        }
+        return "redirect:/user/dashboard";
     }
 }

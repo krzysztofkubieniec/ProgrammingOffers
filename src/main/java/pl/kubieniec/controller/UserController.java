@@ -57,7 +57,7 @@ public class UserController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session) {
-        session.setAttribute("login", "");
+        session.invalidate();
         return "redirect:/";
     }
 
@@ -65,6 +65,7 @@ public class UserController {
     public String dashboard(@SessionAttribute String login, Model model) {
         User user = userService.findUserByLogin(login);
         model.addAttribute("activeOrders",orderService.findActiveOrdersByUser(user));
+        model.addAttribute("nonActiveOrders",orderService.findNonActiveOrdersByUser(user));
         return "/user/dashboard";
     }
 }

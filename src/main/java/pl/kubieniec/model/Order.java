@@ -1,17 +1,15 @@
 package pl.kubieniec.model;
 
 import lombok.Data;
-import lombok.Getter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -33,10 +31,13 @@ public class Order {
     @NotBlank
     private String content;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.S")
     private Date created;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Future
+    private Date updated;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Future(groups = CreatingAndUpdateingOrder.class)
     private Date end;
 
     @ManyToOne
@@ -47,11 +48,12 @@ public class Order {
     @JoinColumn(name = "executor_id")
     private User executor;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Category> categories;
 
     @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)// ZAPYTAĆ MARCINA JAK NIE ROBIĆ EAGER
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProgrammingLanguage> programmingLanguages;
 
     public int getHoursTillEnd() {

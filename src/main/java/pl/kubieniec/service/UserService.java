@@ -4,8 +4,10 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.kubieniec.model.Order;
 import pl.kubieniec.model.Role;
 import pl.kubieniec.model.User;
+import pl.kubieniec.repository.OrderRepository;
 import pl.kubieniec.repository.RoleRepository;
 import pl.kubieniec.repository.UserRepository;
 
@@ -18,9 +20,6 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
 
     public void save(User user) {
         String password = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
@@ -43,6 +42,7 @@ public class UserService {
     public User findUserByLogin(String login) {
         return userRepository.findUserByLogin(login);
     }
+
 }
 
 

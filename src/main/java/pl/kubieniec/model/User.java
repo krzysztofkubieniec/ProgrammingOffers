@@ -3,8 +3,7 @@ package pl.kubieniec.model;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import pl.kubieniec.repository.RoleRepository;
-import pl.kubieniec.validate.DetailUserInfo;
+import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -47,7 +46,7 @@ public class User {
     private String lastName;
 
     @Column(name = "about_me")
-    @NotBlank(groups = DetailUserInfo.class)
+    @NotBlank(groups = CreatingAndUpdateingOrder.class)
     private String aboutMe;
 
     @Column(name = "phone_number")

@@ -10,6 +10,8 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findTop10ByEndAfterOrderByEndAsc(Date date);
+
     List<Order> findAllByEndAfterAndEmployerOrderByEndAsc(Date date, User employer);
 
+    List<Order> findAllByEndBeforeAndEmployerOrderByEndDesc(Date date, User employer);
 }

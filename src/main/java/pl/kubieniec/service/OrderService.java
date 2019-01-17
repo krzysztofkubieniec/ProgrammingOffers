@@ -30,21 +30,35 @@ public class OrderService {
         Calendar nowCalendar = Calendar.getInstance();
         Date now = nowCalendar.getTime();
         order.setCreated(now);
-        Date end = order.getEnd();
-        Calendar endCalendar = Calendar.getInstance();
-        endCalendar.setTime(end);
-        endCalendar.set(Calendar.HOUR_OF_DAY, nowCalendar.get(Calendar.HOUR_OF_DAY));
-        endCalendar.set(Calendar.MINUTE, nowCalendar.get(Calendar.MINUTE));
-        endCalendar.set(Calendar.SECOND, nowCalendar.get(Calendar.SECOND));
-        end = endCalendar.getTime();
-        order.setEnd(end);
         User user = userRepository.findUserByLogin(login);
         order.setEmployer(user);
         orderRepository.save(order);
     }
 
+    public void update(Order order) {
+        order.setUpdated(Calendar.getInstance().getTime());
+        orderRepository.save(order);
+    }
+
+    public void end(Long id) {
+        orderRepository.findOne(id).setEnd(Calendar.getInstance().getTime());
+    }
+
     public List<Order> findActiveOrdersByUser(User user) {
-        return orderRepository.findAllByEndAfterAndEmployerOrderByEndAsc(new Date(),user);
+        return orderRepository.findAllByEndAfterAndEmployerOrderByEndAsc(new Date(), user);
+    }
+
+    public List<Order> findNonActiveOrdersByUser(User user) {
+        return orderRepository.findAllByEndBeforeAndEmployerOrderByEndDesc(new Date(), user);
+    }
+
+    public Boolean validateOrderByUser(String login, Long orderId) {
+        User user = userRepository.findUserByLogin(login);
+        Order order = orderRepository.findOne(orderId);
+        if (order.getEmployer().equals(user)) {
+            return true;
+        }
+        return false;
     }
 }
 

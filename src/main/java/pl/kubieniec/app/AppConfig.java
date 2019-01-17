@@ -1,7 +1,8 @@
 package pl.kubieniec.app;
 
-import converter.CategoryConverter;
-import converter.ProgrammingLanguageConverter;
+import pl.kubieniec.converter.CategoryConverter;
+import pl.kubieniec.converter.DateConverter;
+import pl.kubieniec.converter.ProgrammingLanguageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -29,18 +30,17 @@ import java.util.Locale;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "pl.kubieniec.repository")
 public class AppConfig extends WebMvcConfigurerAdapter {
+
     @Bean
     public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver =
-                new InternalResourceViewResolver();
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
 
     @Override
-    public void configureDefaultServletHandling(
-            DefaultServletHandlerConfigurer configurer) {
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 
@@ -61,7 +61,9 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(getCategoryConverter());
         registry.addConverter(getProgrammingLanguageConverter());
+        registry.addConverter(getDateConverter());
     }
+
     @Bean
     public CategoryConverter getCategoryConverter() {
         return new CategoryConverter();
@@ -72,10 +74,15 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return new ProgrammingLanguageConverter();
     }
 
-    @Bean(name="localeResolver")
+    @Bean
+    public DateConverter getDateConverter() {
+        return new DateConverter();
+    }
+
+    @Bean(name = "localeResolver")
     public LocaleContextResolver getLocaleContextResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
-        localeResolver.setDefaultLocale(new Locale("pl","PL"));
+        localeResolver.setDefaultLocale(new Locale("pl", "PL"));
         return localeResolver;
     }
 

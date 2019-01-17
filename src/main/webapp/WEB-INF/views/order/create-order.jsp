@@ -21,9 +21,9 @@
                 <form:textarea cssClass="form-control" rows="15" cols="80" path="content"/>
                 <form:errors path="content"/>
             </div>
-            <div class="form-group col-4">
+            <div class="form-group col-5">
                 <label>Data zakończenia:</label>
-                <form:input cssClass="form-control" type="date" path="end"/><br>
+                <form:input cssClass="form-control" type="datetime-local" path="end"/><br>
                 <form:errors path="end"/><br>
             </div>
             <div class="form-row">
@@ -39,9 +39,11 @@
                                  itemValue="id"></form:select>
                 </div>
             </div>
-
             <div class="row">
                 <div class="mx-auto">
+                    <form:hidden path="employer.id"/>
+                    <form:hidden path="created"/>
+                    <form:hidden path="updated"/>
                     <input type="submit" class="btn btn-primary" value="Wyślij"/>
                 </div>
             </div>
