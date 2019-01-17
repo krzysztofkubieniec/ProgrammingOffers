@@ -12,7 +12,6 @@
 <div class="container">
 
     <div class="row mx-5 mt-5">
-
         <div class="d-flex flex-column col-6">
             <a class="btn btn-success btn-lg btn-block"
                href="#">
@@ -43,7 +42,6 @@
                     <form>
                         <li class="list-group-item">
                             <h6>Kategorie:</h6>
-
                             <c:forEach items="${categories}" var="category">
                                 <div class="form-group ml-1">
                                     <input class="form-check-input" type="checkbox" value="">
@@ -122,7 +120,7 @@
                                     <div class="col">
                                         <div class="content text-justify">
                                                 ${order.shortenContent}
-                                            <a href="#" class="btn btn-link rfp-show-details">Pokaż więcej <i
+                                            <a href="/order/show/${order.id}" class="btn btn-link rfp-show-details">Pokaż więcej <i
                                                     class="fa fa-angle-right"></i></a>
                                         </div>
                                         <div class="details">

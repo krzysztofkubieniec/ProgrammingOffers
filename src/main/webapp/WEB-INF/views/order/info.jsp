@@ -45,8 +45,8 @@
                 </div>
             </div>
 
-                <div class="container">
-                    <div class="row">
+            <div class="container">
+                <div class="row">
                     <div class="details-bg text-left col-8 p">
                         <div>
                             Kategorie:
@@ -77,14 +77,27 @@
         <div class="text-justify w-75 mx-auto rounded-custom bg-light p-3">
             <span>${order.content}</span>
         </div>
-        <div class="col-2 m-4 mx-auto">
-            <a class="btn btn-lg btn-primary"
-               href="/order/show/${order.id}">
-                Złóż ofertę
-            </a>
-        </div>
+
     </div>
 
 </div>
+<div id="offer" class="container">
+    <div class="mx-auto p-3 my-5 text-center bg-light rounded-custom">
+        <form>
+            <div class="form-group">
+                
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="text-center">
+        <button class="btn btn-lg btn-primary offer-slider">
+            Złóż ofertę
+        </button>
+    </div>
+</div>
+<script src="<c:url value="/resources/js/app.js" />"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

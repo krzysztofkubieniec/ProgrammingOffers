@@ -40,4 +40,8 @@ body {
     border-radius:.50rem!important
 }
 
+#offer {
+    display: none;
+}
+
 

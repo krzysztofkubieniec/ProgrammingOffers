@@ -69,7 +69,7 @@
                                 <div class="col">
                                     <div class="content text-justify">
                                             ${order.shortenContent}
-                                        <a href="#" class="btn btn-link rfp-show-details">Pokaż więcej <i
+                                        <a href="/order/show/${order.id}" class="btn btn-link rfp-show-details">Pokaż więcej <i
                                                 class="fa fa-angle-right"></i></a>
                                     </div>
                                     <div class="details">
@@ -112,16 +112,11 @@
                                         </li>
                                         <li class="list-inline-item">
                                             <div><i class="far fa-bell"></i>
-                                                <c:choose>
-                                                    <c:when test="${order.hoursTillEnd == 1}"><span
-                                                            class="red"> do końca 1 godzina</span></c:when>
-                                                    <c:when test="${order.hoursTillEnd > 1 && order.hoursTillEnd <= 24 }"><span
-                                                            class="red"> do końca ${order.hoursTillEnd} godziny</span></c:when>
-                                                    <c:when test="${order.hoursTillEnd > 24}"><span>koniec <fmt:formatDate
+                                                <span>zakończono <fmt:formatDate
                                                             dateStyle="medium"
                                                             timeStyle="short" type="both"
-                                                            value="${order.end}"/></span></c:when>
-                                                </c:choose>
+                                                            value="${order.end}"/></span>
+
                                             </div>
                                         </li>
                                     </ul>
@@ -144,7 +139,7 @@
                                 <div class="col">
                                     <div class="content text-justify">
                                             ${order.shortenContent}
-                                        <a href="#" class="btn btn-link rfp-show-details">Pokaż więcej <i
+                                        <a href="/order/show/${order.id}" class="btn btn-link rfp-show-details">Pokaż więcej <i
                                                 class="fa fa-angle-right"></i></a>
                                     </div>
                                     <div class="details">
