@@ -6,7 +6,7 @@
     <persistence-unit name="programmingOffersPersistenceUnit">
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://localhost:3306/programming_offers" />
+                      value="jdbc:mysql://programming-offers.cxk9wgz7s5d6.eu-west-1.rds.amazonaws.com:3306/programmingoffer" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="coderslab" />
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
@@ -23,3 +23,7 @@
         </properties>
     </persistence-unit>
 </persistence>
+
+
+<!--<property name="javax.persistence.jdbc.url"-->
+          <!--value="jdbc:mysql://programming-offers.cxk9wgz7s5d6.eu-west-1.rds.amazonaws.com:3306/programmingoffer" />-->
