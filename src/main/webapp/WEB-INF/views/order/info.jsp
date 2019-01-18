@@ -12,8 +12,7 @@
 <body>
 <%@ include file="../header.jsp" %>
 <div class="container">
-
-    <div class="mx-auto p-3 my-5 text-center bg-light rounded-custom">
+    <div class="mx-auto p-3 mt-5 text-center bg-light rounded-custom">
         <div class="rounded-custom mx-auto">
             <h3>${order.title}</h3>
             <div class="row">
@@ -78,18 +77,26 @@
             <span>${order.content}</span>
         </div>
     </div>
-</div>
-<c:forEach items="${offers}" var="offer">
+
+    <c:forEach items="${offers}" var="offer">
+        <div class="container">
+            <div class="w-50 mx-auto m-1 text-center bg-light rounded-custom">
+                    ${offer.price}<br>
+                    ${offer.message}
+            </div>
+        </div>
+    </c:forEach>
     <div class="container">
-        <div class="mx-auto p-3 my-5 text-center bg-light rounded-custom">
-            ${offer.price}<br>
-            ${offer.message}
+        <div class="row">
+            <div class="mx-auto m-4 pb-3">
+                <button class="btn btn-primary offer-slider">Złóż oferte</button>
+            </div>
         </div>
     </div>
-</c:forEach>
-<div id="offer" class="container">
-    <div class="mx-auto p-3 my-5 text-center bg-light rounded-custom">
-        <%@ include file="../offer/create-offer.jsp" %>
+    <div id="offer-create" class="container">
+        <div class="mx-auto p-3 my-5 text-center bg-light rounded-custom">
+            <%@ include file="../offer/create-offer.jsp" %>
+        </div>
     </div>
 </div>
 <script src="<c:url value="/resources/js/app.js" />"></script>
