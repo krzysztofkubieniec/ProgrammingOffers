@@ -8,9 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "programming_language")
+@Table(name = "technology")
 @Data
-public class ProgrammingLanguage {
+public class Technology {
     @Id
     @GeneratedValue
     private Long id;

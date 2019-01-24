@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,7 +11,6 @@
 <body>
 <%@ include file="header.jsp" %>
 <div class="container">
-
     <div class="row mx-5 mt-5">
         <div class="d-flex flex-column col-6">
             <a class="btn btn-success btn-lg btn-block"
@@ -39,7 +39,7 @@
                     <li class="list-group-item text-center">
                         <h5>Filtr</h5>
                     </li>
-                    <form action="/order/filter" method="POST">
+                    <form action="/filter" method="POST">
                         <li class="list-group-item">
                             <h6>Kategorie:</h6>
                             <c:forEach items="${categories}" var="category">
@@ -54,12 +54,12 @@
                         <li class="list-group-item">
                             <h6>Technologie:</h6>
 
-                            <c:forEach items="${programmingLanguages}" var="item">
+                            <c:forEach items="${technologies}" var="technology">
                                 <div class="form-group ml-1">
-                                    <input class="form-check-input" type="checkbox" value=""
-                                           <c:if test="fn:contains(selectedProgrammingLanguages, item)">checked="checked"</c:if>>
+                                    <input class="form-check-input" type="checkbox" name="technologies" value="${technology.id}"
+                                           <c:if test="fn:contains(selectedTechnologies, technology)">checked="checked"</c:if>>
                                     <label class="form-check-label">
-                                            ${item.name}
+                                            ${technology.name}
                                     </label>
                                 </div>
                             </c:forEach>
@@ -130,8 +130,8 @@
                                             </div>
                                             <div>
                                                 Technologie:
-                                                <c:forEach items="${order.programmingLanguages}" var="language">
-                                                    ${language.name} </c:forEach>
+                                                <c:forEach items="${order.technologies}" var="technology">
+                                                    ${technology.name} </c:forEach>
 
                                             </div>
                                         </div>
@@ -144,6 +144,7 @@
             </div>
         </div>
     </div>
+    ${ordersCount}
 </div>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package pl.kubieniec.controller;
 
-import org.hibernate.jpa.event.internal.core.JpaPersistOnFlushEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,14 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import pl.kubieniec.model.Category;
 import pl.kubieniec.model.Offer;
 import pl.kubieniec.model.Order;
-import pl.kubieniec.model.ProgrammingLanguage;
+import pl.kubieniec.model.Technology;
 import pl.kubieniec.repository.CategoryRepository;
 import pl.kubieniec.repository.OfferRepository;
 import pl.kubieniec.repository.OrderRepository;
-import pl.kubieniec.repository.ProgrammingLanguageRepository;
-import pl.kubieniec.service.OfferService;
+import pl.kubieniec.repository.TechnologyRepository;
 import pl.kubieniec.service.OrderService;
-import pl.kubieniec.service.UserService;
 import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
 import java.util.List;
@@ -39,16 +36,16 @@ public class OrderController {
     private OrderRepository orderRepository;
 
     @Autowired
-    private ProgrammingLanguageRepository programmingLanguageRepository;
+    private TechnologyRepository technologyRepository;
 
     @ModelAttribute("categories")
     private List<Category> getCategories() {
         return categoryRepository.findAll();
     }
 
-    @ModelAttribute("programmingLanguages")
-    private List<ProgrammingLanguage> getProgrammingLanguages() {
-        return programmingLanguageRepository.findAll();
+    @ModelAttribute("technologies")
+    private List<Technology> getTechnologies() {
+        return technologyRepository.findAll();
     }
 
     @RequestMapping(value = "/logged/create-order", method = RequestMethod.GET)
@@ -100,11 +97,5 @@ public class OrderController {
         model.addAttribute("offer",new Offer());
         model.addAttribute("offers",offerRepository.findAllByOrder(order));
         return "/order/info";
-    }
-
-    @RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public String filter(@RequestParam("categories") List<Category> categories, @RequestParam("technologies") ) {
-        System.out.println(categories);
-        return "/";
     }
 }

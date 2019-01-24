@@ -3,10 +3,13 @@ package pl.kubieniec.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import pl.kubieniec.model.Category;
 import pl.kubieniec.model.Order;
+import pl.kubieniec.model.Technology;
 import pl.kubieniec.model.User;
 import pl.kubieniec.repository.OrderRepository;
 import pl.kubieniec.repository.UserRepository;
+import sun.util.resources.cldr.te.CalendarData_te_IN;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -41,7 +44,7 @@ public class OrderService {
     }
 
     public void end(Long id) {
-        Long time = Calendar.getInstance().getTime().getTime()-1000;
+        Long time = Calendar.getInstance().getTime().getTime() - 1000;
         orderRepository.findOne(id).setEnd(new Date(time));
     }
 
@@ -61,6 +64,17 @@ public class OrderService {
         }
         return false;
     }
+
+    public List<Order> filter(List<Category> categories, List<Technology> technologies) {
+        if (categories != null && technologies == null) {
+            return orderRepository.findTop10ByCategoriesInOrderByEndAsc(categories);
+        }
+        if (categories == null && technologies != null) {
+            return orderRepository.findTop10ByTechnologiesInOrderByEndAsc(technologies);
+        }
+        return orderRepository.findTop10ByCategoriesInAndTechnologiesInOrderByEndAsc(categories, technologies);
+    }
+
 }
 
 

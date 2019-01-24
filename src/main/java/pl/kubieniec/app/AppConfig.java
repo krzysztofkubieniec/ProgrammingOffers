@@ -2,7 +2,7 @@ package pl.kubieniec.app;
 
 import pl.kubieniec.converter.CategoryConverter;
 import pl.kubieniec.converter.DateConverter;
-import pl.kubieniec.converter.ProgrammingLanguageConverter;
+import pl.kubieniec.converter.TechnologyConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -70,8 +70,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ProgrammingLanguageConverter getProgrammingLanguageConverter() {
-        return new ProgrammingLanguageConverter();
+    public TechnologyConverter getProgrammingLanguageConverter() {
+        return new TechnologyConverter();
     }
 
     @Bean

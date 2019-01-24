@@ -53,8 +53,8 @@
 						</div>
 						<div>
 							Technologie:
-							<c:forEach items="${order.programmingLanguages}" var="language">
-								${language.name} </c:forEach>
+							<c:forEach items="${order.technologies}" var="technology">
+								${technology.name} </c:forEach>
 
 						</div>
 					</div>

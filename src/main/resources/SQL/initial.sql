@@ -1,6 +1,6 @@
 ALTER DATABASE programming_offers DEFAULT CHARACTER SET utf8 COLLATE utf8_polish_ci;
 
-INSERT INTO `programming_language` VALUES (1,'Java'),(2,'C#'),(3,'Javascript'),(4,'C++'),(5,'mySQL'),(6,'PostgreSQL'),(7,'HTML');
+INSERT INTO `technology` VALUES (1,'Java'),(2,'C#'),(3,'Javascript'),(4,'C++'),(5,'mySQL'),(6,'PostgreSQL'),(7,'HTML');
 
 INSERT INTO `category` VALUES (1,'test','Strony internetowe'),(2,'test1','Serwisy, portale'),(3,'test2','Bazy danych'),(4,'test3','Grafika komputerowa'),(5,'test4','Pozycjonowanie stron');
 
@@ -12,4 +12,4 @@ INSERT INTO `orders` VALUES (NULL,'Zlecę projekt procesu tworzenia raportów z 
 
 INSERT INTO `orders_category` VALUES (1,1),(2,2),(2,3),(3,3),(3,4),(4,1),(5,2),(6,1),(7,5),(8,4),(9,3),(9,5),(10,1),(10,2),(11,5),(12,5),(13,4),(13,4),(14,3),(15,5),(16,4),(17,3),(17,5),(17,2),(18,3),(18,2),(19,5),(20,5),(21,2),(22,3),(23,4);
 
-INSERT INTO `orders_programming_language` VALUES (1,1),(2,2),(2,3),(3,3),(3,4),(4,2),(5,1),(6,1),(7,5),(8,6),(9,7),(9,5),(10,3),(10,5),(11,4),(12,5),(13,2),(13,4),(14,3),(15,1),(16,4),(17,3),(17,5),(17,2),(18,4),(18,2),(19,5),(20,5),(21,3),(22,3),(23,4);
+INSERT INTO `orders_technology` VALUES (1,1),(2,2),(2,3),(3,3),(3,4),(4,2),(5,1),(6,1),(7,5),(8,6),(9,7),(9,5),(10,3),(10,5),(11,4),(12,5),(13,2),(13,4),(14,3),(15,1),(16,4),(17,3),(17,5),(17,2),(18,4),(18,2),(19,5),(20,5),(21,3),(22,3),(23,4);

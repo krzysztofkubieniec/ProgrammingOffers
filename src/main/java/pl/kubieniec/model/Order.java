@@ -54,7 +54,7 @@ public class Order {
 
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ProgrammingLanguage> programmingLanguages;
+    private List<Technology> technologies;
 
     public int getHoursTillEnd() {
         if (end != null) {
