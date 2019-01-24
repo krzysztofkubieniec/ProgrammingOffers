@@ -5,7 +5,6 @@
 <head>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <title>Title</title>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -39,12 +38,12 @@
                     <li class="list-group-item text-center">
                         <h5>Filtr</h5>
                     </li>
-                    <form>
+                    <form action="/order/filter" method="POST" modelAttribute="categories">
                         <li class="list-group-item">
                             <h6>Kategorie:</h6>
-                            <c:forEach items="${categories}" var="category">
+                            <c:forEach items="${categories}" var="category" varStatus="status">
                                 <div class="form-group ml-1">
-                                    <input class="form-check-input" type="checkbox" value="">
+                                    <input class="form-check-input" name="${category.id}" type="checkbox">
                                     <label class="form-check-label">
                                             ${category.name}
                                     </label>

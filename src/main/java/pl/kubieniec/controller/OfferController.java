@@ -14,7 +14,7 @@ import pl.kubieniec.service.OfferService;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/offer")
+@RequestMapping("/logged/offer")
 public class OfferController {
 
     @Autowired

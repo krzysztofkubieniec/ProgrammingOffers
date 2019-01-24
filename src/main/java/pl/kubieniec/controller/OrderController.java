@@ -1,5 +1,6 @@
 package pl.kubieniec.controller;
 
+import org.hibernate.jpa.event.internal.core.JpaPersistOnFlushEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,13 +51,13 @@ public class OrderController {
         return programmingLanguageRepository.findAll();
     }
 
-    @RequestMapping(value = "/create-order", method = RequestMethod.GET)
+    @RequestMapping(value = "/logged/create-order", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("order", new Order());
         return "/order/create-order";
     }
 
-    @RequestMapping(value = "/create-order", method = RequestMethod.POST)
+    @RequestMapping(value = "/logged/create-order", method = RequestMethod.POST)
     public String add(@Validated({CreatingAndUpdateingOrder.class}) Order order, BindingResult result, @SessionAttribute String login) {
         if (result.hasErrors()) {
             return "/order/create-order";
@@ -65,7 +66,7 @@ public class OrderController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/logged/edit/{id}", method = RequestMethod.GET)
     public String update(@SessionAttribute String login, @PathVariable Long id, Model model) {
         if (orderService.validateOrderByUser(login, id)) {
             Order order = orderRepository.findOne(id);
@@ -75,21 +76,21 @@ public class OrderController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/logged/edit/{id}", method = RequestMethod.POST)
     public String update(@Validated({CreatingAndUpdateingOrder.class}) Order order, BindingResult result) {
         if (result.hasErrors()) {
             return "/order/create-order";
         }
         orderService.update(order);
-        return "redirect:/user/dashboard";
+        return "redirect:/user/logged/dashboard";
     }
 
-    @RequestMapping(value = "/end/{id}")
+    @RequestMapping(value = "/logged/end/{id}")
     public String update(@PathVariable Long id, @SessionAttribute String login) {
         if (orderService.validateOrderByUser(login, id)) {
             orderService.end(id);
         }
-        return "redirect:/user/dashboard";
+        return "redirect:/user/logged/dashboard";
     }
 
     @RequestMapping("/show/{id}")
@@ -99,5 +100,11 @@ public class OrderController {
         model.addAttribute("offer",new Offer());
         model.addAttribute("offers",offerRepository.findAllByOrder(order));
         return "/order/info";
+    }
+
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    public String filter(@ModelAttribute("categories") List<Category> categories) {
+        System.out.println(categories);
+        return "/";
     }
 }

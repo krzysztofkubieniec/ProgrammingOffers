@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <title>Title</title>
+
 </head>
 <body>
 <%@ include file="../header.jsp" %>
@@ -23,7 +23,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-10 pt-2">
-                                    <h3><span><a href="#" class="title pull-left">${order.title}</a></span></h3>
+                                    <h3><span><a href="/order/show/${order.id}" class="title pull-left">${order.title}</a></span></h3>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <div><i class="far fa-calendar-alt"></i> dodano <fmt:formatDate
@@ -58,11 +58,11 @@
                                 </div>
                                 <div class="col-2">
                                     <a class="btn btn-warning btn-sm"
-                                       href="/order/edit/${order.id}">
+                                       href="/order/logged/edit/${order.id}">
                                         Edytuj
                                     </a>
                                     <a class="btn btn-danger btn-sm mt-2"
-                                       href="/order/end/${order.id}">
+                                       href="/order/logged/end/${order.id}">
                                         Zakończ
                                     </a>
                                 </div>
@@ -102,7 +102,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-10 pt-2">
-                                    <h3><span><a href="#" class="title pull-left">${order.title}</a></span></h3>
+                                    <h3><span><a href="/order/show/${order.id}" class="title pull-left">${order.title}</a></span></h3>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <div><i class="far fa-calendar-alt"></i> dodano <fmt:formatDate
