@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -38,18 +39,17 @@
                     <li class="list-group-item text-center">
                         <h5>Filtr</h5>
                     </li>
-                    <form action="/order/filter" method="POST" modelAttribute="categories">
+                    <form action="/order/filter" method="POST">
                         <li class="list-group-item">
                             <h6>Kategorie:</h6>
-                            <c:forEach items="${categories}" var="category" varStatus="status">
+                            <c:forEach items="${categories}" var="category">
                                 <div class="form-group ml-1">
-                                    <input class="form-check-input" name="${category.id}" type="checkbox">
+                                    <input type="checkbox" class="form-check-input" name="categories" value="${category.id}"/>
                                     <label class="form-check-label">
                                             ${category.name}
                                     </label>
                                 </div>
                             </c:forEach>
-
                         </li>
                         <li class="list-group-item">
                             <h6>Technologie:</h6>

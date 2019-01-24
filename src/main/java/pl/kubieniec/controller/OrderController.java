@@ -103,7 +103,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
-    public String filter(@ModelAttribute("categories") List<Category> categories) {
+    public String filter(@RequestParam("categories") List<Category> categories, @RequestParam("technologies") ) {
         System.out.println(categories);
         return "/";
     }
