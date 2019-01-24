@@ -36,7 +36,7 @@ public class UserController {
             return "/user/create-account";
         }
         userService.save(user);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -61,7 +61,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping("/dashboard")
+    @RequestMapping("/logged/dashboard")
     public String dashboard(@SessionAttribute String login, Model model) {
         User user = userService.findUserByLogin(login);
         model.addAttribute("activeOrders",orderService.findActiveOrdersByUser(user));

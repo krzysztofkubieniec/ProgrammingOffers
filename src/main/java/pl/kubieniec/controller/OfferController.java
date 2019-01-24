@@ -14,15 +14,15 @@ import pl.kubieniec.service.OfferService;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/offer")
+@RequestMapping("/logged/offer")
 public class OfferController {
 
     @Autowired
     private OfferService offerService;
 
-    @RequestMapping(value = "/add/{id}", method = RequestMethod.POST)
-    public String add(@Valid Offer offer, @SessionAttribute String login, @PathVariable Long id) {
-        offerService.save(offer, login, id);
-        return "redirect:/order/show/{id}";
+    @RequestMapping(value = "/add/{orderId}", method = RequestMethod.POST)
+    public String add(@Valid Offer offer, @SessionAttribute String login, @PathVariable Long orderId) {
+        offerService.save(offer, login, orderId);
+        return "redirect:/order/show/{orderId}";
     }
 }
