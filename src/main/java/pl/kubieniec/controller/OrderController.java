@@ -19,7 +19,7 @@ import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/order")
 public class OrderController {
 
@@ -98,4 +98,12 @@ public class OrderController {
         model.addAttribute("offers",offerRepository.findAllByOrder(order));
         return "/order/info";
     }
+
+    @PostMapping(value = "/filter")
+    public String filter(@RequestBody List<Category> categories) {
+        System.out.println(categories);
+        return "Udalo sie";
+
+    }
+
 }

@@ -66,7 +66,7 @@
 								</c:forEach>
 							</li>
 							<li class="list-group-item text-center">
-								<input id="filter" class="btn btn-primary" type="submit" value="Filtruj"/>
+								<input id="filter" class="btn btn-primary" type="button" value="Filtruj"/>
 							</li>
 							<li class="list-group-item text-center">
 								<input id="clear" class="btn btn-primary" type="button" value="Wyczyść"/>
