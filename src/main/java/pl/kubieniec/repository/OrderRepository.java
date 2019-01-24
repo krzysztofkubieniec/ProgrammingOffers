@@ -11,17 +11,17 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
+    List<Order> findTop10ByEndAfterOrderByEndAsc(Date date);
+
     List<Order> findAllByEndAfterAndEmployerOrderByEndAsc(Date date, User employer);
 
     List<Order> findAllByEndBeforeAndEmployerOrderByEndDesc(Date date, User employer);
 
-    List<Order> findTop10ByEndAfterOrderByEndAsc(Date date);
+    List<Order> findTop10ByEndAfterAndCategoriesInAndTechnologiesInOrderByEndAsc(Date date, List<Category> categories, List<Technology> technologies);
 
-    List<Order> findTop10ByCategoriesInAndTechnologiesInOrderByEndAsc(List<Category> categories, List<Technology> technologies);
+    List<Order> findTop10ByEndAfterAndCategoriesInOrderByEndAsc(Date date, List<Category> categories);
 
-    List<Order> findTop10ByCategoriesInOrderByEndAsc(List<Category> categories);
-
-    List<Order> findTop10ByTechnologiesInOrderByEndAsc(List<Technology> technologies);
+    List<Order> findTop10ByEndAfterAndTechnologiesInOrderByEndAsc(Date date, List<Technology> technologies);
 
     long count();
 }

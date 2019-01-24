@@ -49,7 +49,7 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public String filterOrders(@RequestParam(value = "categories", required = false) List<Category> categories, @RequestParam(value = "technologies", required = false) List<Technology> technologies, Model model) {
         model.addAttribute("orders",orderService.filter(categories,technologies));
         return "index";

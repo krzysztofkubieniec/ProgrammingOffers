@@ -66,13 +66,16 @@ public class OrderService {
     }
 
     public List<Order> filter(List<Category> categories, List<Technology> technologies) {
+        if (categories == null && technologies == null) {
+            return orderRepository.findTop10ByEndAfterOrderByEndAsc(new Date());
+        }
         if (categories != null && technologies == null) {
-            return orderRepository.findTop10ByCategoriesInOrderByEndAsc(categories);
+            return orderRepository.findTop10ByEndAfterAndCategoriesInOrderByEndAsc(new Date(), categories);
         }
         if (categories == null && technologies != null) {
-            return orderRepository.findTop10ByTechnologiesInOrderByEndAsc(technologies);
+            return orderRepository.findTop10ByEndAfterAndTechnologiesInOrderByEndAsc(new Date(), technologies);
         }
-        return orderRepository.findTop10ByCategoriesInAndTechnologiesInOrderByEndAsc(categories, technologies);
+        return orderRepository.findTop10ByEndAfterAndCategoriesInAndTechnologiesInOrderByEndAsc(new Date(), categories, technologies);
     }
 
 }
