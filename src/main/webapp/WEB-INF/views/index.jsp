@@ -124,8 +124,7 @@
 										</a>
 									</div>
 									<div class="col">
-										<div class="content text-justify">
-												${order.shortenContent}
+										<div class="content text-justify">${order.shortenContent}
 											<a href="/order/show/${order.id}" class="btn btn-link rfp-show-details">Pokaż
 												więcej <i
 														class="fa fa-angle-right"></i></a>

@@ -43,7 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function modifyOrder(order, li, ul) {
-        li.find("a.btn").attr("href","/order/show/" + order.id);
+        li.find("a.title").text(order.title);
+        li.find("div.content").text(order.shortenContent).append("<a href = '/order/show/" + order.id + "' class='btn btn-link rfp-show-details'> Pokaż więcej <i class = 'fa fa-angle-right'> </i></a>");
+        li.find("a.btn").attr("href", "/order/show/" + order.id);
         li.find("span#created").text(formatDate(order.created));
         var end = li.find("div#end span");
         if (order.hoursTillEnd === 1) {

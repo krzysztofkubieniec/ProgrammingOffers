@@ -42,16 +42,13 @@ public class HomeController {
         return technologyRepository.findAll();
     }
 
-    @RequestMapping("/")
-    public String home(Model model) {
-        model.addAttribute("orders", orderService.findTop10());
-        model.addAttribute("ordersCount", orderRepository.count());
-        return "index";
+    @ModelAttribute("orders")
+    private List<Order> getOrders() {
+        return orderService.findTop10();
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String filterOrders(@RequestParam(value = "categories", required = false) List<Category> categories, @RequestParam(value = "technologies", required = false) List<Technology> technologies, Model model) {
-        model.addAttribute("orders",orderService.filter(categories,technologies));
+    @RequestMapping("/")
+    public String home(Model model) {
         return "index";
     }
 }
