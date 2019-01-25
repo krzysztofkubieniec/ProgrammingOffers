@@ -1,6 +1,8 @@
 package pl.kubieniec.model;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import pl.kubieniec.validate.CreatingAndUpdateingOrder;
@@ -54,5 +56,6 @@ public class User {
     private String phoneNumber;
 
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Role> roles = new ArrayList<>();
 }

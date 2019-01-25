@@ -39,7 +39,7 @@
 					<li class="list-group-item text-center">
 						<h5>Filtr</h5>
 					</li>
-						<form method="POST">
+						<form class="filter" method="POST">
 							<li class="list-group-item">
 								<h6>Kategorie:</h6>
 								<c:forEach items="${categories}" var="category" varStatus="status">

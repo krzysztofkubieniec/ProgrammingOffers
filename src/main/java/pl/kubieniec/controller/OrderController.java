@@ -1,6 +1,7 @@
 package pl.kubieniec.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -93,17 +94,15 @@ public class OrderController {
     @RequestMapping("/show/{id}")
     public String show(@PathVariable Long id, Model model) {
         Order order = orderRepository.findOne(id);
-        model.addAttribute("order",order);
-        model.addAttribute("offer",new Offer());
-        model.addAttribute("offers",offerRepository.findAllByOrder(order));
+        model.addAttribute("order", order);
+        model.addAttribute("offer", new Offer());
+        model.addAttribute("offers", offerRepository.findAllByOrder(order));
         return "/order/info";
     }
 
-    @PostMapping(value = "/filter")
-    public String filter(@RequestBody List<Category> categories) {
-        System.out.println(categories);
-        return "Udalo sie";
-
+    @RequestMapping(value = "/filter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Order> filter(@RequestParam(value = "categories", required = false) List<Category> categories, @RequestParam(value = "technologies", required = false) List<Technology> technologies) {
+        return orderService.filter(categories, technologies);
     }
 
 }
