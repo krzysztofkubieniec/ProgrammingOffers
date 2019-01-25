@@ -20,7 +20,7 @@ import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/order")
 public class OrderController {
 
@@ -101,6 +101,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public List<Order> filter(@RequestParam(value = "categories", required = false) List<Category> categories, @RequestParam(value = "technologies", required = false) List<Technology> technologies) {
         return orderService.filter(categories, technologies);
     }

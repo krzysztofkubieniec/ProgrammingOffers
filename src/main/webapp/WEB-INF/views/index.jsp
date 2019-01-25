@@ -39,39 +39,41 @@
 					<li class="list-group-item text-center">
 						<h5>Filtr</h5>
 					</li>
-						<form class="filter" method="POST">
-							<li class="list-group-item">
-								<h6>Kategorie:</h6>
-								<c:forEach items="${categories}" var="category" varStatus="status">
-									<div class="form-group ml-1">
-										<input id="category${status.index}" type="checkbox" class="form-check-input" name="categories"
-										       value="${category.id}"/>
-										<label class="form-check-label">
-												${category.name}
-										</label>
-									</div>
-								</c:forEach>
-							</li>
-							<li class="list-group-item">
-								<h6>Technologie:</h6>
-								<c:forEach items="${technologies}" var="technology" varStatus="status">
-									<div class="form-group ml-1">
-										<input id="technology${status.index}" class="form-check-input" type="checkbox" name="technologies"
-										       value="${technology.id}"
-										       <c:if test="fn:contains(selectedTechnologies, technology)">checked="checked"</c:if>>
-										<label class="form-check-label">
-												${technology.name}
-										</label>
-									</div>
-								</c:forEach>
-							</li>
-							<li class="list-group-item text-center">
-								<input id="filter" class="btn btn-primary" type="button" value="Filtruj"/>
-							</li>
-							<li class="list-group-item text-center">
-								<input id="clear" class="btn btn-primary" type="button" value="Wyczyść"/>
-							</li>
-						</form>
+					<form class="filter" method="POST">
+						<li class="list-group-item">
+							<h6>Kategorie:</h6>
+							<c:forEach items="${categories}" var="category" varStatus="status">
+								<div class="form-group ml-1">
+									<input id="category${status.index}" type="checkbox" class="form-check-input"
+									       name="categories"
+									       value="${category.id}"/>
+									<label class="form-check-label">
+											${category.name}
+									</label>
+								</div>
+							</c:forEach>
+						</li>
+						<li class="list-group-item">
+							<h6>Technologie:</h6>
+							<c:forEach items="${technologies}" var="technology" varStatus="status">
+								<div class="form-group ml-1">
+									<input id="technology${status.index}" class="form-check-input" type="checkbox"
+									       name="technologies"
+									       value="${technology.id}"
+									       <c:if test="fn:contains(selectedTechnologies, technology)">checked="checked"</c:if>>
+									<label class="form-check-label">
+											${technology.name}
+									</label>
+								</div>
+							</c:forEach>
+						</li>
+						<li class="list-group-item text-center">
+							<input id="filter" class="btn btn-primary" type="button" value="Filtruj"/>
+						</li>
+						<li class="list-group-item text-center">
+							<input id="clear" class="btn btn-primary" type="button" value="Wyczyść"/>
+						</li>
+					</form>
 
 				</ul>
 			</div>
@@ -86,13 +88,13 @@
 										             class="title">${order.title}</a></span></h3>
 										<ul class="list-inline">
 											<li class="list-inline-item">
-												<div><i class="far fa-calendar-alt"></i> dodano <fmt:formatDate
+												<div><i class="far fa-calendar-alt"></i> dodano <span id="created"> <fmt:formatDate
 														dateStyle="medium"
 														timeStyle="short" type="both"
-														value="${order.created}"/></div>
+														value="${order.created}"/></span></div>
 											</li>
 											<li class="list-inline-item">
-												<div><i class="far fa-bell"></i>
+												<div id="end"><i class="far fa-bell"></i>
 													<c:choose>
 														<c:when test="${order.hoursTillEnd == 1}"><span
 																class="red"> do końca 1 godzina</span></c:when>

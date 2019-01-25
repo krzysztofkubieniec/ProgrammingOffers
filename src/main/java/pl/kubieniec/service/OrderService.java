@@ -11,6 +11,8 @@ import pl.kubieniec.repository.OrderRepository;
 import pl.kubieniec.repository.UserRepository;
 import sun.util.resources.cldr.te.CalendarData_te_IN;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,27 @@ public class OrderService {
 
     public List<Order> findTop10() {
         return orderRepository.findTop10ByEndAfterOrderByEndAsc(new Date());
+    }
+
+    public List<Order> findActiveOrdersByUser(User user) {
+        return orderRepository.findAllByEndAfterAndEmployerOrderByEndAsc(new Date(), user);
+    }
+
+    public List<Order> findNonActiveOrdersByUser(User user) {
+        return orderRepository.findAllByEndBeforeAndEmployerOrderByEndDesc(new Date(), user);
+    }
+
+    public List<Order> filter(List<Category> categories, List<Technology> technologies) {
+        if (categories == null && technologies == null) {
+            return orderRepository.findTop10ByEndAfterOrderByEndAsc(new Date());
+        }
+        if (categories != null && technologies == null) {
+            return orderRepository.findTop10ByEndAfterAndCategoriesInOrderByEndAsc(new Date(), categories);
+        }
+        if (categories == null && technologies != null) {
+            return orderRepository.findTop10ByEndAfterAndTechnologiesInOrderByEndAsc(new Date(), technologies);
+        }
+        return orderRepository.findTop10ByEndAfterAndCategoriesInAndTechnologiesInOrderByEndAsc(new Date(), categories, technologies);
     }
 
     public void save(Order order, String login) {
@@ -48,14 +71,6 @@ public class OrderService {
         orderRepository.findOne(id).setEnd(new Date(time));
     }
 
-    public List<Order> findActiveOrdersByUser(User user) {
-        return orderRepository.findAllByEndAfterAndEmployerOrderByEndAsc(new Date(), user);
-    }
-
-    public List<Order> findNonActiveOrdersByUser(User user) {
-        return orderRepository.findAllByEndBeforeAndEmployerOrderByEndDesc(new Date(), user);
-    }
-
     public Boolean validateOrderByUser(String login, Long orderId) {
         User user = userRepository.findUserByLogin(login);
         Order order = orderRepository.findOne(orderId);
@@ -65,18 +80,12 @@ public class OrderService {
         return false;
     }
 
-    public List<Order> filter(List<Category> categories, List<Technology> technologies) {
-        if (categories == null && technologies == null) {
-            return orderRepository.findTop10ByEndAfterOrderByEndAsc(new Date());
-        }
-        if (categories != null && technologies == null) {
-            return orderRepository.findTop10ByEndAfterAndCategoriesInOrderByEndAsc(new Date(), categories);
-        }
-        if (categories == null && technologies != null) {
-            return orderRepository.findTop10ByEndAfterAndTechnologiesInOrderByEndAsc(new Date(), technologies);
-        }
-        return orderRepository.findTop10ByEndAfterAndCategoriesInAndTechnologiesInOrderByEndAsc(new Date(), categories, technologies);
-    }
+//    public Date dateformat(Date date) {
+//        DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
+//
+//        String formattedDate = formatter.format(date);
+//        System.out.println(formattedDate);
+//    }
 
 }
 
