@@ -85,7 +85,7 @@
 								<div class="row">
 									<div class="col-10">
 										<h3><span><a href="/order/show/${order.id}"
-										             class="title">${order.title}</a></span></h3>
+										             class="btn title">${order.title}</a></span></h3>
 										<ul class="list-inline">
 											<li class="list-inline-item">
 												<div><i class="far fa-calendar-alt"></i> dodano <span id="created"> <fmt:formatDate
@@ -131,12 +131,12 @@
 														class="fa fa-angle-right"></i></a>
 										</div>
 										<div class="details">
-											<div>
+											<div id="categories">
 												Kategorie:
 												<c:forEach items="${order.categories}" var="category">
 													${category.name} </c:forEach>
 											</div>
-											<div>
+											<div id="technologies">
 												Technologie:
 												<c:forEach items="${order.technologies}" var="technology">
 													${technology.name} </c:forEach>
