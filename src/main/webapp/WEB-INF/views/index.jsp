@@ -11,21 +11,21 @@
 <body>
 <%@ include file="header.jsp" %>
 <div class="container">
-	<div class="row mx-5 mt-5">
-		<div class="d-flex flex-column col-6">
-			<a class="btn btn-success btn-lg btn-block"
-			   href="#">
-				Szukaj zleceń
-			</a>
-		</div>
-		<div class="d-flex flex-column col-6">
-			<a class="btn btn-success btn-lg btn-block"
-			   href="#">
-				Szukaj wykonawców
-			</a>
-		</div>
+	<%--<div class="row mx-5 mt-5">--%>
+	<%--<div class="d-flex flex-column col-6">--%>
+	<%--<a class="btn btn-success btn-lg btn-block"--%>
+	<%--href="#">--%>
+	<%--Szukaj zleceń--%>
+	<%--</a>--%>
+	<%--</div>--%>
+	<%--<div class="d-flex flex-column col-6">--%>
+	<%--<a class="btn btn-success btn-lg btn-block"--%>
+	<%--href="#">--%>
+	<%--Szukaj wykonawców--%>
+	<%--</a>--%>
+	<%--</div>--%>
 
-	</div>
+	<%--</div>--%>
 
 	<div class="mt-5">
 		<header id="o-list-header" class="container text-center">
@@ -151,13 +151,13 @@
 						<form class="filter" method="POST">
 							<ul class="pagination justify-content-center">
 								<li class="page-item active">
-									<input id="c0" type="checkbox" class="page-link" name="page" value="0"/>
-									<label for="c0" class="page-link">1</label>
+									<input id="c0" type="checkbox" class="page-link" name="page" value="0" checked/>
+									<label for="c0" class="page-link form-control">1</label>
 									<span class="sr-only">(current)</span></li>
 								<c:forEach var="i" begin="1" end="${lastPageNo-1}">
 									<li class="page-item">
 										<input id="c${i}" type="checkbox" class="page-link" name="page" value="${i}"/>
-										<label for="c${i}" class="page-link">${i+1}</label>
+										<label for="c${i}" class="page-link form-control">${i+1}</label>
 									</li>
 								</c:forEach>
 							</ul>

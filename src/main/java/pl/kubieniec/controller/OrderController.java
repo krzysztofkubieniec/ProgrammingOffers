@@ -1,6 +1,7 @@
 package pl.kubieniec.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +36,6 @@ public class OrderController {
 
     @Autowired
     private TechnologyRepository technologyRepository;
-
-    private static final int PAGE_SIZE = 5;            // Number of rows to contain per page
 
     @ModelAttribute("categories")
     private List<Category> getCategories() {
@@ -101,16 +100,8 @@ public class OrderController {
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Order> filter(@RequestParam(value = "categories", required = false) List<Category> categories, @RequestParam(value = "technologies", required = false) List<Technology> technologies,@RequestParam(value="page", required = false, defaultValue = "0")String page) {
-        System.out.println(page);
-        return orderService.filter(categories, technologies);
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model, @RequestParam(value = "pageNo", required = false, defaultValue = "0") String pageNo) {
-        model.addAttribute("lastPageNo", orderService.countOrders());
-        model.addAttribute("orders", orderService.ordersOnPage(pageNo));
-        return "index";
+    public Page<Order> filter(Model model, @RequestParam(value = "categories", required = false) List<Category> categories, @RequestParam(value = "technologies", required = false) List<Technology> technologies, @RequestParam(value = "page", required = false, defaultValue = "0") String page) {
+        return orderService.filter(categories, technologies,page);
     }
 
 }

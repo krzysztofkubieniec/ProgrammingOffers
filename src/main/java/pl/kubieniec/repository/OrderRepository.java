@@ -14,19 +14,17 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    List<Order> findTop10ByEndAfterOrderByEndAsc(Date date);
-
     List<Order> findAllByEndAfter(Date date, Pageable pageable);
+
+    Page<Order> findByEndAfter(Date date, Pageable pageable);
 
     List<Order> findAllByEndAfterAndEmployerOrderByEndAsc(Date date, User employer);
 
     List<Order> findAllByEndBeforeAndEmployerOrderByEndDesc(Date date, User employer);
 
-    List<Order> findTop10ByEndAfterAndCategoriesInAndTechnologiesInOrderByEndAsc(Date date, List<Category> categories, List<Technology> technologies);
+    Page<Order> findByEndAfterAndCategoriesInAndTechnologiesIn(Date date, List<Category> categories, List<Technology> technologies, Pageable pageable);
 
-    List<Order> findTop10ByEndAfterAndCategoriesInOrderByEndAsc(Date date, List<Category> categories);
+    Page<Order> findByEndAfterAndCategoriesIn(Date date, List<Category> categories, Pageable pageable);
 
-    List<Order> findTop10ByEndAfterAndTechnologiesInOrderByEndAsc(Date date, List<Technology> technologies);
-
-    long count();
+    Page<Order> findByEndAfterAndTechnologiesIn(Date date, List<Technology> technologies, Pageable pageable);
 }

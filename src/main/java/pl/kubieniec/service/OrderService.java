@@ -33,10 +33,6 @@ public class OrderService {
 
     static final int PAGE_SIZE = 5;
 
-    public List<Order> findTop10() {
-        return orderRepository.findTop10ByEndAfterOrderByEndAsc(new Date());
-    }
-
     public List<Order> findActiveOrdersByUser(User user) {
         return orderRepository.findAllByEndAfterAndEmployerOrderByEndAsc(new Date(), user);
     }
@@ -45,17 +41,18 @@ public class OrderService {
         return orderRepository.findAllByEndBeforeAndEmployerOrderByEndDesc(new Date(), user);
     }
 
-    public List<Order> filter(List<Category> categories, List<Technology> technologies) {
+    public Page<Order> filter(List<Category> categories, List<Technology> technologies, String pageStr) {
+        int page = Integer.parseInt(pageStr);
         if (categories == null && technologies == null) {
-            return orderRepository.findTop10ByEndAfterOrderByEndAsc(new Date());
+            return orderRepository.findByEndAfter(new Date(),gotoPage(page));
         }
         if (categories != null && technologies == null) {
-            return orderRepository.findTop10ByEndAfterAndCategoriesInOrderByEndAsc(new Date(), categories);
+            return orderRepository.findByEndAfterAndCategoriesIn(new Date(), categories, gotoPage(page));
         }
         if (categories == null && technologies != null) {
-            return orderRepository.findTop10ByEndAfterAndTechnologiesInOrderByEndAsc(new Date(), technologies);
+            return orderRepository.findByEndAfterAndTechnologiesIn(new Date(), technologies, gotoPage(page));
         }
-        return orderRepository.findTop10ByEndAfterAndCategoriesInAndTechnologiesInOrderByEndAsc(new Date(), categories, technologies);
+        return orderRepository.findByEndAfterAndCategoriesInAndTechnologiesIn(new Date(), categories, technologies, gotoPage(page));
     }
 
     public void save(Order order, String login) {
@@ -106,7 +103,6 @@ public class OrderService {
             lastPageNo = (int) (totalOrdersCount / PAGE_SIZE);
         return lastPageNo;
     }
-
 }
 
 
