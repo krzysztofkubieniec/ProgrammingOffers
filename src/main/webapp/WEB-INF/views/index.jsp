@@ -39,7 +39,7 @@
 					<li class="list-group-item text-center">
 						<h4>Filtr</h4>
 					</li>
-					<form class="filter" method="POST">
+					<form class="action filter" method="POST">
 						<li class="list-group-item">
 							<h5 class="text-center">Kategorie:</h5>
 							<c:forEach items="${categories}" var="category" varStatus="status">
@@ -145,18 +145,17 @@
 						</li>
 					</c:forEach>
 				</ul>
-
 				<nav aria-label="...">
 					<div class="text-center">
-						<form class="filter" method="POST">
+						<form class="action pageination" method="POST">
 							<ul class="pagination justify-content-center">
-								<li class="page-item active">
-									<input id="c0" type="checkbox" class="page-link" name="page" value="0" checked/>
+								<li class="page-item">
+									<input id="c0" type="radio" class="page-link" name="page" value="0" checked/>
 									<label for="c0" class="page-link form-control">1</label>
 									<span class="sr-only">(current)</span></li>
 								<c:forEach var="i" begin="1" end="${lastPageNo-1}">
 									<li class="page-item">
-										<input id="c${i}" type="checkbox" class="page-link" name="page" value="${i}"/>
+										<input id="c${i}" type="radio" class="page-link" name="page" value="${i}"/>
 										<label for="c${i}" class="page-link form-control">${i+1}</label>
 									</li>
 								</c:forEach>

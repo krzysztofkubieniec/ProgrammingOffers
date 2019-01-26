@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var checkboxes = $("form.filter input:checkbox");
+    var filterCheckboxes = $("form.filter input:checkbox");
+    var paginationCheckboxes = $("form.pageination input:radio");
     /*
     Clear checkboxes button
      */
@@ -11,21 +12,24 @@ document.addEventListener("DOMContentLoaded", function () {
     /*
     Filter button
      */
-    checkboxes.on("change", function () {
-        var lis = $('ul.pagination').find("li");
-        for (var i = 0; i < lis.length; i++) {
-            if ($(this).parent().attr("class") === "pagination justify-content-center" && $(this) !== lis[i]) {
-                lis[i].find("input").prop("checked", false);
-            }
-        }
-        ajaxRequest();
-    })
+    filterCheckboxes.on("click", function () {
+        var firstPageLi = $("ul.pagination").children().first();
+        firstPageLi.find("input").prop("checked",true);
+        ajaxFilter();
+
+    });
+
+    /*
+    Page change button
+     */
+    paginationCheckboxes.on("click",function () {
+    console.log("pah!");
+    });
 
     function pasteOrders(result) {
         var ul = $("div.orders ul").first();
         var li = ul.children().first().clone(true);
         ul.empty();
-        pastePaging(result.number, result.totalPages);
         for (var i = 0; i < result.content.length; i++) {
             modifyOrder(result.content[i], li, ul);
         }
@@ -66,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function pastePaging(pageNo, totalPages) {
         var ul = $('ul.pagination');
-        var li = ul.children().first().clone(true).removeClass("active");
+        var li = ul.children().first().clone(true);
         ul.empty();
         for (var i = 0; i < totalPages; i++) {
             var newLi = li.clone(true);
@@ -74,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
             newLi.find("label").attr("for", "c" + i).text(i + 1);
             newLi.find("span").remove();
             if (i === pageNo) {
-                newLi.addClass("active");
                 newLi.find("input").append("<span class=\'sr-only\'>(current)</span>").prop("checked", true);
             }
             ul.append(newLi);
@@ -105,13 +108,16 @@ document.addEventListener("DOMContentLoaded", function () {
     /*
     Ajax request for orders
      */
-    function ajaxRequest() {
+    function ajaxFilter() {
         $.ajax({
             type: 'POST',
             url: '/order/filter',
             data: $("form.filter").serialize(),
             success: function (result) {
                 pasteOrders(result);
+                pastePaging(result.number, result.totalPages);
+                firstPageLi = $("ul.pagination").children().first();
+                firstPageLi.find("input").prop("checked",true);
             },
             error: function (e) {
                 alert('Error occured')

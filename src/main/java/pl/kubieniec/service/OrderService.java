@@ -47,6 +47,9 @@ public class OrderService {
             return orderRepository.findByEndAfter(new Date(),gotoPage(page));
         }
         if (categories != null && technologies == null) {
+            orderRepository.findByEndAfterAndCategoriesIn(new Date(), categories, gotoPage(page)).getContent().stream().map(o -> o.getId()).forEach(System.out::println);
+            System.out.println("-------------");
+            System.out.println(categories);
             return orderRepository.findByEndAfterAndCategoriesIn(new Date(), categories, gotoPage(page));
         }
         if (categories == null && technologies != null) {
