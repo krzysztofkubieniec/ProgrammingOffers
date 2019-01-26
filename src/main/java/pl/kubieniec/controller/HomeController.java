@@ -1,6 +1,8 @@
 package pl.kubieniec.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +17,11 @@ import pl.kubieniec.repository.OrderRepository;
 import pl.kubieniec.repository.TechnologyRepository;
 import pl.kubieniec.service.OrderService;
 
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class HomeController {
@@ -32,6 +38,10 @@ public class HomeController {
     @Autowired
     private TechnologyRepository technologyRepository;
 
+    private static final int PAGE_SIZE = 3;            // Number of rows to contain per page
+
+    private long totalOrdersCount;
+
     @ModelAttribute("categories")
     private List<Category> getCategories() {
         return categoryRepository.findAll();
@@ -44,11 +54,12 @@ public class HomeController {
 
     @ModelAttribute("orders")
     private List<Order> getOrders() {
-        return orderService.findTop10();
+        return orderService.ordersOnPage("0");
     }
 
     @RequestMapping("/")
-    public String home(Model model) {
+    public String index(Model model, HttpSession session, @RequestParam(value = "pageNo", required = false, defaultValue = "0") String pageNo) {
+        model.addAttribute("lastPageNo", orderService.countOrders());
         return "index";
     }
 }

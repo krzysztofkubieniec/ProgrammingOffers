@@ -34,17 +34,17 @@
 	</div>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-2 filter">
+			<div class="col-3 filter">
 				<ul class="list-group o-list-container container">
 					<li class="list-group-item text-center">
-						<h5>Filtr</h5>
+						<h4>Filtr</h4>
 					</li>
 					<form class="filter" method="POST">
 						<li class="list-group-item">
-							<h6>Kategorie:</h6>
+							<h5 class="text-center">Kategorie:</h5>
 							<c:forEach items="${categories}" var="category" varStatus="status">
-								<div class="form-group ml-1">
-									<input id="category${status.index}" type="checkbox" class="form-check-input"
+								<div class="form-group ml-4">
+									<input type="checkbox" class="form-check-input"
 									       name="categories"
 									       value="${category.id}"/>
 									<label class="form-check-label">
@@ -54,10 +54,10 @@
 							</c:forEach>
 						</li>
 						<li class="list-group-item">
-							<h6>Technologie:</h6>
+							<h5 class="text-center">Technologie:</h5>
 							<c:forEach items="${technologies}" var="technology" varStatus="status">
-								<div class="form-group ml-1">
-									<input id="technology${status.index}" class="form-check-input" type="checkbox"
+								<div class="form-group ml-4">
+									<input class="form-check-input" type="checkbox"
 									       name="technologies"
 									       value="${technology.id}"
 									       <c:if test="fn:contains(selectedTechnologies, technology)">checked="checked"</c:if>>
@@ -68,27 +68,25 @@
 							</c:forEach>
 						</li>
 						<li class="list-group-item text-center">
-							<input id="filter" class="btn btn-primary" type="button" value="Filtruj"/>
-						</li>
-						<li class="list-group-item text-center">
 							<input id="clear" class="btn btn-primary" type="button" value="Wyczyść"/>
 						</li>
 					</form>
 
 				</ul>
 			</div>
-			<div class="col-10 orders">
+			<div class="col-9 orders">
 				<ul class="list-group">
 					<c:forEach var="order" items="${orders}">
 						<li class="list-group-item m-1 rounded-custom">
 							<div class="container">
 								<div class="row">
 									<div class="col-10">
-										<h3><span><a href="/order/show/${order.id}"
-										             class="btn title">${order.title}</a></span></h3>
+										<h3><a href="/order/show/${order.id}"
+										       class="btn title text-left">${order.title}</a></h3>
 										<ul class="list-inline">
 											<li class="list-inline-item">
-												<div><i class="far fa-calendar-alt"></i> dodano <span id="created"> <fmt:formatDate
+												<div><i class="far fa-calendar-alt"></i> dodano <span
+														id="created"> <fmt:formatDate
 														dateStyle="medium"
 														timeStyle="short" type="both"
 														value="${order.created}"/></span></div>
@@ -147,10 +145,28 @@
 						</li>
 					</c:forEach>
 				</ul>
+
+				<nav aria-label="...">
+					<div class="text-center">
+						<form class="filter" method="POST">
+							<ul class="pagination justify-content-center">
+								<li class="page-item active">
+									<input id="c0" type="checkbox" class="page-link" name="page" value="0"/>
+									<label for="c0" class="page-link">1</label>
+									<span class="sr-only">(current)</span></li>
+								<c:forEach var="i" begin="1" end="${lastPageNo-1}">
+									<li class="page-item">
+										<input id="c${i}" type="checkbox" class="page-link" name="page" value="${i}"/>
+										<label for="c${i}" class="page-link">${i+1}</label>
+									</li>
+								</c:forEach>
+							</ul>
+						</form>
+					</div>
+				</nav>
 			</div>
 		</div>
 	</div>
-	${ordersCount}
 </div>
 <script src="<c:url value="/resources/js/app.js"/>"></script>
 <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>

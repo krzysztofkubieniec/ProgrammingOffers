@@ -1,8 +1,14 @@
 package pl.kubieniec.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.kubieniec.model.Category;
 import pl.kubieniec.model.Order;
 import pl.kubieniec.model.Technology;
@@ -13,9 +19,7 @@ import sun.util.resources.cldr.te.CalendarData_te_IN;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Transactional
 @Component
@@ -26,6 +30,8 @@ public class OrderService {
 
     @Autowired
     private UserRepository userRepository;
+
+    static final int PAGE_SIZE = 5;
 
     public List<Order> findTop10() {
         return orderRepository.findTop10ByEndAfterOrderByEndAsc(new Date());
@@ -80,12 +86,26 @@ public class OrderService {
         return false;
     }
 
-//    public Date dateformat(Date date) {
-//        DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
-//
-//        String formattedDate = formatter.format(date);
-//        System.out.println(formattedDate);
-//    }
+    private PageRequest gotoPage(int page) {
+        PageRequest request = new PageRequest(page, PAGE_SIZE, Sort.Direction.ASC, "end");
+        return request;
+    }
+
+    public List<Order> ordersOnPage(String pageNo) {
+        int gotoPageNo = Integer.parseInt(pageNo);
+        List<Order> orders = orderRepository.findAllByEndAfter(new Date(), gotoPage(gotoPageNo));
+        return orders;
+    }
+
+    public int countOrders() {
+        int lastPageNo;
+        long totalOrdersCount = orderRepository.count();
+        if (totalOrdersCount % PAGE_SIZE != 0)
+            lastPageNo = (int) (totalOrdersCount / PAGE_SIZE) + 1;
+        else
+            lastPageNo = (int) (totalOrdersCount / PAGE_SIZE);
+        return lastPageNo;
+    }
 
 }
 

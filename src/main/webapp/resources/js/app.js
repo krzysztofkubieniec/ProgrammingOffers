@@ -1,36 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
+    var checkboxes = $("form.filter input:checkbox");
     /*
     Clear checkboxes button
      */
     $("#clear").on("click", function () {
-        $("form.filter input:checkbox").prop("checked", false);
-        $("#filter").click();
-    })
-
-    /*
-    Slider offer
-     */
-    $(".offer-slider").click(function () {
-        $("#offer-create").slideToggle();
+        checkboxes.prop("checked", false);
+        ajaxRequest();
     })
 
     /*
     Filter button
      */
-    $("#filter").on("click", function () {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-        $.ajax({
-            type: 'POST',
-            url: '/order/filter',
-            data: $("form.filter").serialize(),
-            success: function (result) {
-                pasteOrders(result);
-            },
-            error: function (e) {
-                alert('Error occured')
-            }
-        });
+    checkboxes.on("change", function () {
+        ajaxRequest();
     })
 
     function pasteOrders(result) {
@@ -85,6 +67,30 @@ document.addEventListener("DOMContentLoaded", function () {
             day = "0" + day;
         }
         return date.getFullYear() + "-" + month + "-" + day + " " + date.getHours() + ":" + date.getMinutes();
+    }
+
+    /*
+    Slider offer
+     */
+    $(".offer-slider").click(function () {
+        $("#offer-create").slideToggle();
+    })
+
+    /*
+    Ajax request for orders
+     */
+    function ajaxRequest() {
+        $.ajax({
+            type: 'POST',
+            url: '/order/filter',
+            data: $("form.filter").serialize(),
+            success: function (result) {
+                pasteOrders(result);
+            },
+            error: function (e) {
+                alert('Error occured')
+            }
+        });
     }
 });
 

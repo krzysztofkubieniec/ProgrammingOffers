@@ -1,8 +1,11 @@
 package pl.kubieniec.app;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PageableArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
 import pl.kubieniec.converter.CategoryConverter;
 import pl.kubieniec.converter.DateConverter;
-
 import pl.kubieniec.converter.TechnologyConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,6 +26,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.persistence.EntityManagerFactory;
 import javax.validation.Validator;
+import java.util.List;
 import java.util.Locale;
 
 @Configuration
@@ -63,7 +67,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         registry.addConverter(getCategoryConverter());
         registry.addConverter(getProgrammingLanguageConverter());
         registry.addConverter(getDateConverter());
-
     }
 
     @Bean
