@@ -27,7 +27,7 @@
 
 	<%--</div>--%>
 
-	<div class="mt-5">
+	<div class="my-5">
 		<header id="o-list-header" class="container text-center">
 			<h2 class="h1">Aktualne zlecenia</h2>
 		</header>
@@ -44,7 +44,7 @@
 							<h5 class="text-center">Kategorie:</h5>
 							<c:forEach items="${categories}" var="category" varStatus="status">
 								<div class="form-group ml-4">
-									<input type="checkbox" class="form-check-input"
+									<input type="radio" class="form-check-input"
 									       name="categories"
 									       value="${category.id}"/>
 									<label class="form-check-label">
@@ -57,7 +57,7 @@
 							<h5 class="text-center">Technologie:</h5>
 							<c:forEach items="${technologies}" var="technology" varStatus="status">
 								<div class="form-group ml-4">
-									<input class="form-check-input" type="checkbox"
+									<input class="form-check-input" type="radio"
 									       name="technologies"
 									       value="${technology.id}"
 									       <c:if test="fn:contains(selectedTechnologies, technology)">checked="checked"</c:if>>
@@ -149,7 +149,7 @@
 					<div class="text-center">
 						<form class="action pageination" method="POST">
 							<ul class="pagination justify-content-center">
-								<li class="page-item">
+								<li class="page-item active">
 									<input id="c0" type="radio" class="page-link" name="page" value="0" checked/>
 									<label for="c0" class="page-link form-control">1</label>
 									<span class="sr-only">(current)</span></li>

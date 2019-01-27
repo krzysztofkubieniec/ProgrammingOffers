@@ -134,10 +134,10 @@
 
 								</div>
 								<div class="col-2">
-									<a class="btn btn-success btn-sm"
-									   href="#">
-										Wystaw ponownie
-									</a>
+									<%--<a class="btn btn-success btn-sm"--%>
+									   <%--href="#">--%>
+										<%--Wystaw ponownie--%>
+									<%--</a>--%>
 								</div>
 								<div class="col">
 									<div class="content text-justify">

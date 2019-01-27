@@ -1,20 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var filterCheckboxes = $("form.filter input:checkbox");
-    var paginationCheckboxes = $("form.pageination input:radio");
+    var filterInputs = $("form.filter input:radio");
+    var paginationInputs = $("form.pageination input:radio");
+    var li = $("div.orders ul").first().children().first().clone(true);
     /*
-    Clear checkboxes button
+    Clear filter button
      */
     $("#clear").on("click", function () {
-        checkboxes.prop("checked", false);
-        ajaxRequest();
+        filterInputs.prop("checked", false);
+        ajaxFilter();
     })
 
     /*
     Filter button
      */
-    filterCheckboxes.on("click", function () {
+    filterInputs.on("click", function () {
         var firstPageLi = $("ul.pagination").children().first();
-        firstPageLi.find("input").prop("checked",true);
+        firstPageLi.find("input").prop("checked", true);
         ajaxFilter();
 
     });
@@ -22,18 +23,30 @@ document.addEventListener("DOMContentLoaded", function () {
     /*
     Page change button
      */
-    paginationCheckboxes.on("click",function () {
-    console.log("pah!");
+    paginationInputs.on("click", function () {
+        ajaxPaging();
     });
 
     function pasteOrders(result) {
         var ul = $("div.orders ul").first();
-        var li = ul.children().first().clone(true);
         ul.empty();
         for (var i = 0; i < result.content.length; i++) {
             modifyOrder(result.content[i], li, ul);
         }
     }
+
+    /*
+    Slider offer
+     */
+    $(".offer-slider").click(function () {
+        $( "#offer-create" ).slideToggle( "slow", function(){
+            if ($(this).is(":visible")) {
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top - 25
+                }, "slow")
+            }
+        });
+    });
 
     function modifyOrder(order, li, ul) {
         var newLi = li.clone(true);
@@ -71,18 +84,36 @@ document.addEventListener("DOMContentLoaded", function () {
     function pastePaging(pageNo, totalPages) {
         var ul = $('ul.pagination');
         var li = ul.children().first().clone(true);
+        li.removeClass("active");
         ul.empty();
         for (var i = 0; i < totalPages; i++) {
             var newLi = li.clone(true);
             newLi.find("input").attr("id", "c" + i).attr("value", i);
             newLi.find("label").attr("for", "c" + i).text(i + 1);
             newLi.find("span").remove();
+            newLi.find("input").prop("checked", false);
             if (i === pageNo) {
                 newLi.find("input").append("<span class=\'sr-only\'>(current)</span>").prop("checked", true);
+                newLi.addClass("active");
             }
             ul.append(newLi);
         }
+        if (totalPages == 0) {
+            var newLi = li.clone(true);
+            newLi.find("input").attr("id", "c0").attr("value", 0);
+            newLi.find("label").attr("for", "c0").text(1);
+            newLi.find("span").remove();
+            newLi.find("input").prop("checked", false);
+            newLi.find("input").append("<span class=\'sr-only\'>(current)</span>").prop("checked", true);
+            newLi.addClass("active");
+            ul.append(newLi);
+        }
 
+    }
+
+    function scrollTo(item) {
+        $("html, body").animate({scrollTop: 0}, "slow");
+        return false;
     }
 
     function formatDate(time) {
@@ -98,26 +129,37 @@ document.addEventListener("DOMContentLoaded", function () {
         return date.getFullYear() + "-" + month + "-" + day + " " + date.getHours() + ":" + date.getMinutes();
     }
 
-    /*
-    Slider offer
-     */
-    $(".offer-slider").click(function () {
-        $("#offer-create").slideToggle();
-    })
 
     /*
-    Ajax request for orders
+    Ajax requests for orders
      */
     function ajaxFilter() {
         $.ajax({
             type: 'POST',
             url: '/order/filter',
-            data: $("form.filter").serialize(),
+            data: $("form.action").serialize(),
             success: function (result) {
                 pasteOrders(result);
                 pastePaging(result.number, result.totalPages);
                 firstPageLi = $("ul.pagination").children().first();
-                firstPageLi.find("input").prop("checked",true);
+                firstPageLi.addClass("active")
+                firstPageLi.find("input").prop("checked", true);
+            },
+            error: function (e) {
+                alert('Error occured')
+            }
+        });
+    }
+
+    function ajaxPaging() {
+        $.ajax({
+            type: 'POST',
+            url: '/order/filter',
+            data: $("form.action").serialize(),
+            success: function (result) {
+                pasteOrders(result);
+                pastePaging(result.number, result.totalPages);
+                scrollTo(0);
             },
             error: function (e) {
                 alert('Error occured')

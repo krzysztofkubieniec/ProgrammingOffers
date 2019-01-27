@@ -30,9 +30,6 @@ public class HomeController {
     private OrderService orderService;
 
     @Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
     private CategoryRepository categoryRepository;
 
     @Autowired

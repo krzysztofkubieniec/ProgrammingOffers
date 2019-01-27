@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -80,13 +81,13 @@
 	<c:forEach items="${offers}" var="offer">
 		<div class="container w-50 mx-auto m-1 text-center bg-light rounded-custom">
 			<div class="row">
-					<div class="col-2 w-50 mx-auto m-1 text-center bg-light rounded-custom">
-						<i class="fas fa-user fa-2x"></i>
-							${offer.contractor.firstName} ${offer.contractor.lastName}
-					</div>
-					<div class="col-10 w-50 mx-auto m-1 text-center bg-light rounded-custom">
+				<div class="col-2 w-50 mx-auto m-1 text-center bg-light rounded-custom">
+					<i class="fas fa-user fa-2x"></i>
+						${offer.contractor.firstName} ${offer.contractor.lastName}
+				</div>
+				<div class="col-10 w-50 mx-auto m-1 text-center bg-light rounded-custom">
 						${offer.message}
-					</div>
+				</div>
 			</div>
 		</div>
 	</c:forEach>
@@ -97,13 +98,34 @@
 			</div>
 		</div>
 	</div>
+	<form:form modelAttribute="offer" method="post" action="/logged/offer/add/${order.id}">
+	<form:errors path="price"/><br>
+	<form:errors path="message"/><br>
+
 	<div id="offer-create" class="container">
 		<div class="mx-auto p-3 text-center bg-light rounded-custom">
-			<%@ include file="../offer/create-offer.jsp" %>
+			<div class="container">
+				<div class="row">
+					<div class="mx-auto">
+						<h2>Oferta</h2>
+					</div>
+				</div>
+			</div>
+				<div class="form-group">
+					<div class="row col-4">
+						<label>Kwota (nie wymagane):</label>
+						<form:input cssClass="col-4" path="price"/>
+					</div>
+					<label>Wiadomość:</label>
+					<form:textarea cssClass="form-control" rows="8" cols="50" path="message"/>
+				</div>
+				<input type="submit" class="btn btn-success" value="Potwierdź"/>
+
 		</div>
 	</div>
+	</form:form>
 </div>
-<script src="<c:url value="/resources/js/app.js" />"></script>
+<script src="<c:url value="/resources/js/app.js"/>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

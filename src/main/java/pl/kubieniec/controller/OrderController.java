@@ -100,7 +100,7 @@ public class OrderController {
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Page<Order> filter(Model model, @RequestParam(value = "categories", required = false) List<Category> categories, @RequestParam(value = "technologies", required = false) List<Technology> technologies, @RequestParam(value = "page", required = false, defaultValue = "0") String page) {
+    public Page<Order> filter(@RequestParam(value = "categories", required = false) List<Category> categories, @RequestParam(value = "technologies", required = false) List<Technology> technologies, @RequestParam(value = "page", required = false, defaultValue = "0") String page) {
         return orderService.filter(categories, technologies,page);
     }
 
