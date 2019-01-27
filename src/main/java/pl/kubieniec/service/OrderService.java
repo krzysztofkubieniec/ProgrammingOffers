@@ -44,12 +44,9 @@ public class OrderService {
     public Page<Order> filter(List<Category> categories, List<Technology> technologies, String pageStr) {
         int page = Integer.parseInt(pageStr);
         if (categories == null && technologies == null) {
-            return orderRepository.findByEndAfter(new Date(),gotoPage(page));
+            return orderRepository.findByEndAfter(new Date(), gotoPage(page));
         }
         if (categories != null && technologies == null) {
-            orderRepository.findByEndAfterAndCategoriesIn(new Date(), categories, gotoPage(page)).getContent().stream().map(o -> o.getId()).forEach(System.out::println);
-            System.out.println("-------------");
-
             return orderRepository.findByEndAfterAndCategoriesIn(new Date(), categories, gotoPage(page));
         }
         if (categories == null && technologies != null) {
