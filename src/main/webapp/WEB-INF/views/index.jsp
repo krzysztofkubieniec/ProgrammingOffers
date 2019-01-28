@@ -94,8 +94,8 @@
 											<li class="list-inline-item">
 												<div id="end"><i class="far fa-bell"></i>
 													<c:choose>
-														<c:when test="${order.hoursTillEnd == 1}"><span
-																class="red"> do końca 1 godzina</span></c:when>
+														<c:when test="${order.hoursTillEnd <= 1}"><span
+																class="red"> do końca mniej niż godzina</span></c:when>
 														<c:when test="${order.hoursTillEnd > 1 && order.hoursTillEnd <= 24 }"><span
 																class="red"> do końca ${order.hoursTillEnd} godziny</span></c:when>
 														<c:when test="${order.hoursTillEnd > 24}"><span>koniec <fmt:formatDate
