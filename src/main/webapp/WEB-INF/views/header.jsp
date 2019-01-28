@@ -7,6 +7,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Charmonman:400,700|Open+Sans:400,600,700&amp;subset=latin-ext"
 	      rel="stylesheet">
 	<link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet" type="text/css"/>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
 	<title>Programming offers</title>
 </head>
 <body>
