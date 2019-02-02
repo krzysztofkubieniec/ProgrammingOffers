@@ -7,12 +7,18 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     $("#clear").on("click", function () {
         filterInputs.prop("checked", false);
+        filterInputs.parents().find("li").removeClass("active");
         ajaxFilter();
     })
 
     /*
     Filter button
      */
+    filterInputs.on("change", function () {
+        $(this).parent().parent().find("li").removeClass("active");
+        $(this).parent().addClass("active");
+    });
+
     filterInputs.on("click", function () {
         var firstPageLi = $("ul.pagination").children().first();
         firstPageLi.find("input").prop("checked", true);
@@ -39,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Slider offer
      */
     $(".offer-slider").click(function () {
-        $( "#offer-create" ).slideToggle( "slow", function(){
+        $("#offer-create").slideToggle("slow", function () {
             if ($(this).is(":visible")) {
                 $('html,body').animate({
                     scrollTop: $(this).offset().top - 25

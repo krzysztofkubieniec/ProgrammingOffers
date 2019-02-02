@@ -42,30 +42,33 @@
 					<form class="action filter" method="POST">
 						<li class="list-group-item">
 							<h5 class="text-center">Kategorie:</h5>
+							<ul class="list-group borderless">
 							<c:forEach items="${categories}" var="category" varStatus="status">
-								<div class="form-group ml-4">
-									<input type="radio" class="form-check-input"
+								<li class="page-item py-0 options">
+									<input id="cat${status.index}" type="radio" class="form-check-input"
 									       name="categories"
 									       value="${category.id}"/>
-									<label class="form-check-label">
+									<label for="cat${status.index}" class="page-link">
 											${category.name}
 									</label>
-								</div>
+								</li>
 							</c:forEach>
+							</ul>
 						</li>
 						<li class="list-group-item">
 							<h5 class="text-center">Technologie:</h5>
+							<ul class="list-group borderless">
 							<c:forEach items="${technologies}" var="technology" varStatus="status">
-								<div class="form-group ml-4">
-									<input class="form-check-input" type="radio"
+								<li class="page-item py-0 options">
+									<input id="tech${status.index}" class="form-check-input" type="radio"
 									       name="technologies"
-									       value="${technology.id}"
-									       <c:if test="fn:contains(selectedTechnologies, technology)">checked="checked"</c:if>>
-									<label class="form-check-label">
+									       value="${technology.id}">
+									<label for="tech${status.index}" class="page-link">
 											${technology.name}
 									</label>
-								</div>
+								</li>
 							</c:forEach>
+							</ul>
 						</li>
 						<li class="list-group-item text-center">
 							<input id="clear" class="btn btn-primary" type="button" value="Wyczyść"/>

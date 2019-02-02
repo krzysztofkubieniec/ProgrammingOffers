@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: lightgrey!important;
+    background-color: lightgrey !important;
 }
 
 .orders h3 a {
@@ -41,7 +41,7 @@ body {
 }
 
 .rounded-custom {
-    border-radius:.50rem!important
+    border-radius: .50rem !important
 }
 
 #offer-create {
@@ -51,14 +51,26 @@ body {
 .main-logo {
     font-family: "Charmonman", cursive;
     display: inline-block;
-    color: var(--light-link-color)!important;
+    color: var(--light-link-color) !important;
     margin-top: 10px;
     font-size: 2rem;
     font-weight: 600;
 }
 
-input.page-link {
+input[type="radio"] {
     display: none;
+}
+
+label {
+    display: block;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.borderless li {
+    border: 0 none;
 }
 
 /* Sticky footer styles
@@ -67,20 +79,19 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
+
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-
-
     background-color: #f5f5f5;
 }
-
 
 /* Custom page CSS
 -------------------------------------------------- */
