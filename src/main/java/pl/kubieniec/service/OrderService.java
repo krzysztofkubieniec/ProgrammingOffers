@@ -41,18 +41,19 @@ public class OrderService {
         return orderRepository.findAllByEndBeforeAndEmployerOrderByEndDesc(new Date(), user);
     }
 
-    public Page<Order> filter(List<Category> categories, List<Technology> technologies, String pageStr) {
+    public Page<Order> filter(List<Category> categories, List<Technology> technologies, String search, String pageStr) {
         int page = Integer.parseInt(pageStr);
+        search = ("".equals(search)) ? "%" : search;
         if (categories == null && technologies == null) {
-            return orderRepository.findByEndAfter(new Date(), gotoPage(page));
+            return orderRepository.findByEndAfterAndTitleContaining(new Date(), search, gotoPage(page));
         }
         if (categories != null && technologies == null) {
-            return orderRepository.findByEndAfterAndCategoriesIn(new Date(), categories, gotoPage(page));
+            return orderRepository.findByEndAfterAndCategoriesInAndTitleContaining(new Date(), categories, search, gotoPage(page));
         }
         if (categories == null && technologies != null) {
-            return orderRepository.findByEndAfterAndTechnologiesIn(new Date(), technologies, gotoPage(page));
+            return orderRepository.findByEndAfterAndTechnologiesInAndTitleContaining(new Date(), technologies, search, gotoPage(page));
         }
-        return orderRepository.findByEndAfterAndCategoriesInAndTechnologiesIn(new Date(), categories, technologies, gotoPage(page));
+        return orderRepository.findByEndAfterAndCategoriesInAndTechnologiesInAndTitleContaining(new Date(), categories, technologies, search, gotoPage(page));
     }
 
     public void save(Order order, String login) {

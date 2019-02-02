@@ -8,8 +8,32 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#clear").on("click", function () {
         filterInputs.prop("checked", false);
         filterInputs.parents().find("li").removeClass("active");
+        $("input.search").val("");
         ajaxFilter();
-    })
+    });
+
+    /*
+    Searching
+     */
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 1000;  //time in ms, 5 second for example
+    var $input = $('input.search');
+
+    //on keyup, start the countdown
+    $input.on('keyup', function () {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    });
+
+    //on keydown, clear the countdown
+    $input.on('keydown', function () {
+        clearTimeout(typingTimer);
+    });
+
+    //user is "finished typing," do something
+    function doneTyping() {
+        ajaxFilter();
+    }
 
     /*
     Filter button
