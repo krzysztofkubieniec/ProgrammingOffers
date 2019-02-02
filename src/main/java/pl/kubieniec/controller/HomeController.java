@@ -35,10 +35,6 @@ public class HomeController {
     @Autowired
     private TechnologyRepository technologyRepository;
 
-    private static final int PAGE_SIZE = 3;            // Number of rows to contain per page
-
-    private long totalOrdersCount;
-
     @ModelAttribute("categories")
     private List<Category> getCategories() {
         return categoryRepository.findAll();
