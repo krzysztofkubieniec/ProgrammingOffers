@@ -5,12 +5,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<div class="container">
+<div class="container-fluid px-5">
     <%--<div class="row mx-5 mt-5">--%>
     <%--<div class="d-flex flex-column col-6">--%>
     <%--<a class="btn btn-success btn-lg btn-block"--%>
@@ -34,16 +32,24 @@
     </div>
     <div class="container-fluid my-3">
         <div class="row">
-            <div class="col-3 filter">
+            <div class="col-2 filter">
                 <ul class="list-group o-list-container container">
                     <li class="list-group-item text-center">
-                        <h4>Filtr</h4>
+                        <h5>Filtr</h5>
                     </li>
                     <form class="action filter" method="POST">
-                        <li class="list-group-item">
-                            <h5 class="text-center">Kategorie:</h5>
+                        <li class="list-group-item text-center">
                             <ul class="list-group borderless">
-                                <div class="mx-4">
+                                <li class="page-item options">
+                                    <input class="form-control search" type="textfield" name="search" placeholder="Szukaj w tytule">
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <h6 class="text-center">Kategorie:</h6>
+                            <ul class="list-group borderless">
+
                                     <c:forEach items="${categories}" var="category" varStatus="status">
 
                                         <li class="page-item py-0 options">
@@ -55,13 +61,13 @@
                                             </label>
                                         </li>
                                     </c:forEach>
-                                </div>
+
                             </ul>
                         </li>
                         <li class="list-group-item">
-                            <h5 class="text-center">Technologie:</h5>
+                            <h6 class="text-center">Technologie:</h6>
                             <ul class="list-group borderless">
-                                <div class="mx-4">
+
                                     <c:forEach items="${technologies}" var="technology" varStatus="status">
                                         <li class="page-item py-0 options">
                                             <input id="tech${status.index}" class="form-check-input" type="radio"
@@ -72,25 +78,17 @@
                                             </label>
                                         </li>
                                     </c:forEach>
-                                </div>
+
                             </ul>
                         </li>
                         <li class="list-group-item text-center">
                             <input id="clear" class="btn btn-primary" type="button" value="Wyczyść filtr"/>
                         </li>
-                        <li class="list-group-item">
-                            <ul class="list-group borderless">
-                                <div class="mx-4">
-                                    <li class="page-item py-0 options">
-                                        <input class="form-control search" type="textfield" name="search" placeholder="Szukaj w tytule">
-                                    </li>
-                                </div>
-                            </ul>
-                        </li>
+
                     </form>
                 </ul>
             </div>
-            <div class="col-9 orders">
+            <div class="col-8 orders">
                 <ul class="list-group">
                     <c:forEach var="order" items="${orders}">
                         <li class="list-group-item m-1 rounded-custom">

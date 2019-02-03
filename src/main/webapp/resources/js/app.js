@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     $("#clear").on("click", function () {
         filterInputs.prop("checked", false);
-        filterInputs.parents().find("li").removeClass("active");
+        filterInputs.parents().find("li.page-item").removeClass("active");
         $("input.search").val("");
         ajaxFilter();
     });
@@ -26,8 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     //on keydown, clear the countdown
-    $input.on('keydown', function () {
+    $input.on('keydown', function (e) {
         clearTimeout(typingTimer);
+        if (event.keyCode === 13) {
+            e.preventDefault();
+            typingTimer = setTimeout(doneTyping, 0);
+            ajaxFilter();
+        }
     });
 
     //user is "finished typing," do something
@@ -64,6 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
             modifyOrder(result.content[i], li, ul);
         }
     }
+
+
 
     /*
     Slider offer
