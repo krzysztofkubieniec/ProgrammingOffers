@@ -14,7 +14,6 @@
 </head>
 <body>
 <header class="page-header">
-
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand main-logo py-1" href="/">Programming<span> Offers</span></a>
