@@ -26,18 +26,18 @@
                     <li class="nav-item active  text-center">
                         <a class="nav-link" href="/order/logged/create-order">
                             <i class="far fa-file fa-lg"></i>
-                            <p class="py-0 my-0">Dodaj zlecenie</p>
+                            <p>Dodaj zlecenie</p>
                         </a>
                     </li>
                     <c:if test="${not empty login}">
                         <li class="nav-item active text-center">
                             <a class="nav-link" href="/user/logged/dashboard">
                                 <i class="fas fa-user-circle fa-lg"></i>
-                                <p class="py-0 my-0">Konto</p>
+                                <p>Konto</p>
                             </a>
                         </li>
                         <li class="nav-item active text-center">
-                            <a class="nav-link" href="/user/logout">
+                            <a class="nav-link" href="/user/logged/logout">
                                 <i class="fas fa-sign-in-alt"></i>
                                 <p>Wyloguj się</p>
                             </a>

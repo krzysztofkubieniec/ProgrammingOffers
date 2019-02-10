@@ -24,6 +24,11 @@ nav {
 
 
 .nav-link p {
+    padding: 0px 0px 0px 0px !important;
+    margin: 0px 0px !important;
+}
+
+li.nav-item {
     padding: 0px 0px 0px 20px !important;
     margin: 0px 0px !important;
 }
