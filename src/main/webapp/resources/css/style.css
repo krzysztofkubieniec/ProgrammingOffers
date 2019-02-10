@@ -131,7 +131,11 @@ ul {
 
 input,
 input.search-sm::-webkit-input-placeholder {
-    font-size: 10px;
+     font-size: 10px;
+ }
+
+input.search::-webkit-input-placeholder {
+    font-size: 0.7rem;
 }
 
 #sidebar .sidebar-header {

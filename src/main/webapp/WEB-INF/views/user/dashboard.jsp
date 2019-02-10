@@ -76,7 +76,7 @@
                         <%--</form>--%>
                     <%--</ul>--%>
                 <%--</div>--%>
-                <div class="col-5 orders">
+                <div class="col orders">
                     <header class="text-center">
                         <h2 class="h1">Aktywne zlecenia</h2>
                     </header>
@@ -157,7 +157,7 @@
                         </c:forEach>
                     </ul>
                 </div>
-                <div class="col-5 orders">
+                <div class="col orders">
                     <header class="text-center">
                         <h2 class="h1">Nieaktywne zlecenia</h2>
                     </header>

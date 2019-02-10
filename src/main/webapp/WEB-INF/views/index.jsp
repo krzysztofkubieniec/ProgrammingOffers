@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<div class="container-fluid px-5">
+<div class="container">
     <%--<div class="row mx-5 mt-5">--%>
     <%--<div class="d-flex flex-column col-6">--%>
     <%--<a class="btn btn-success btn-lg btn-block"--%>
@@ -41,7 +41,7 @@
                         <li class="list-group-item text-center">
                             <ul class="list-group borderless">
                                 <li class="page-item options">
-                                    <input class="form-control search" type="textfield" name="search" placeholder="Szukaj w tytule">
+                                    <input class="form-control form-control-sm search" type="textfield" name="search" placeholder="Szukaj w tytule">
                                 </li>
 
                             </ul>
@@ -82,13 +82,13 @@
                             </ul>
                         </li>
                         <li class="list-group-item text-center">
-                            <input id="clear" class="btn btn-primary" type="button" value="Wyczyść filtr"/>
+                            <input id="clear" class="btn btn-sm btn-primary" type="button" value="Wyczyść filtr"/>
                         </li>
 
                     </form>
                 </ul>
             </div>
-            <div class="col-8 orders">
+            <div class="col-10 orders">
                 <ul class="list-group">
                     <c:forEach var="order" items="${orders}">
                         <li class="list-group-item m-1 rounded-custom">
