@@ -14,6 +14,8 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
+    int countByEndAfter(Date date);
+
     List<Order> findAllByEndAfter(Date date, Pageable pageable);
 
     Page<Order> findByEndAfterAndTitleContaining(Date date, String title, Pageable pageable);

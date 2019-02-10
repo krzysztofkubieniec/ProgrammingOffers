@@ -97,7 +97,7 @@ public class OrderService {
 
     public int countOrders() {
         int lastPageNo;
-        long totalOrdersCount = orderRepository.count();
+        long totalOrdersCount = orderRepository.countByEndAfter(new Date());
         if (totalOrdersCount % PAGE_SIZE != 0)
             lastPageNo = (int) (totalOrdersCount / PAGE_SIZE) + 1;
         else
