@@ -10,13 +10,7 @@
 <body>
 <%@ include file="../../header.jsp" %>
 <div class="wrapper">
-    <nav id="sidebar">
-        <ul class="list-unstyled components borderless">
-            <li class="active">
-                <a href="/user/logged/dashboard">Zlecenia</a>
-            </li>
-        </ul>
-    </nav>
+    <%@ include file="left-navbar.jsp" %>
     <div class="container-fluid mt-5">
         <div class="row">
             <%--<div class="col-2 filter mt-5">--%>

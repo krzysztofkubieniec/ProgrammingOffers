@@ -64,6 +64,3 @@
     </nav>
 
 </header>
-
-</body>
-</html>

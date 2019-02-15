@@ -78,7 +78,7 @@ public class OrderController {
             return "/order/create-order";
         }
         orderService.update(order);
-        return "redirect:/user/logged/dashboard";
+        return "redirect:/user/logged/dashboard-orders";
     }
 
     @RequestMapping(value = "/logged/end/{id}")
@@ -86,7 +86,7 @@ public class OrderController {
         if (orderService.validateOrderByUser(login, id)) {
             orderService.end(id);
         }
-        return "redirect:/user/logged/dashboard";
+        return "redirect:/user/logged/dashboard-orders";
     }
 
     @RequestMapping("/show/{id}")

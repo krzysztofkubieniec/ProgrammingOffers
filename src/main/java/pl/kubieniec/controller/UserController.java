@@ -75,6 +75,11 @@ public class UserController {
 
     @RequestMapping("/logged/dashboard")
     public String dashboard(@SessionAttribute String login, Model model) {
+        return "/user/dashboard/dashboard";
+    }
+
+    @RequestMapping("/logged/dashboard-orders")
+    public String dashboardOrders(@SessionAttribute String login, Model model) {
         User user = userService.findUserByLogin(login);
         model.addAttribute("activeOrders", orderService.findActiveOrdersByUser(user));
         model.addAttribute("nonActiveOrders", orderService.findNonActiveOrdersByUser(user));
