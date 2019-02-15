@@ -113,7 +113,7 @@
 			</div>
 				<div class="form-group">
 					<div class="row col-4">
-						<label>Kwota (nie wymagane):</label>
+						<label>Kwota (nie wymagane): </label>
 						<form:input cssClass="col-4" path="price"/>
 					</div>
 					<label>Wiadomość:</label>

@@ -9,6 +9,7 @@ import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,6 +39,7 @@ public class Order {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.S")
     @Future(groups = CreatingAndUpdateingOrder.class)
+    @NotNull
     private Date end;
 
     @ManyToOne

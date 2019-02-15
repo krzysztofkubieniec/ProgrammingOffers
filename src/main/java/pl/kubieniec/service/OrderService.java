@@ -104,6 +104,19 @@ public class OrderService {
             lastPageNo = (int) (totalOrdersCount / PAGE_SIZE);
         return lastPageNo;
     }
+
+    public Order getOrderToEdit(Long id) {
+        Order order = orderRepository.findOne(id);
+        Date date = new Date();
+        if (order.getEnd().before(date)) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            cal.add(Calendar.DATE, 7);
+            date = cal.getTime();
+            order.setEnd(date);
+        }
+        return order;
+    }
 }
 
 

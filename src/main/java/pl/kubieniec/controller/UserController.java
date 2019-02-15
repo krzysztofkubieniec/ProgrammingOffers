@@ -80,6 +80,6 @@ public class UserController {
         model.addAttribute("nonActiveOrders", orderService.findNonActiveOrdersByUser(user));
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("technologies", technologyRepository.findAll());
-        return "/user/dashboard";
+        return "/user/dashboard/dashboard-orders";
     }
 }

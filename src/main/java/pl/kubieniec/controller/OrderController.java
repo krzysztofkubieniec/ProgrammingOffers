@@ -65,7 +65,7 @@ public class OrderController {
     @RequestMapping(value = "/logged/edit/{id}", method = RequestMethod.GET)
     public String update(@SessionAttribute String login, @PathVariable Long id, Model model) {
         if (orderService.validateOrderByUser(login, id)) {
-            Order order = orderRepository.findOne(id);
+            Order order = orderService.getOrderToEdit(id);
             model.addAttribute("order", order);
             return "/order/create-order";
         }
