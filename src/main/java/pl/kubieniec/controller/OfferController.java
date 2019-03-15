@@ -15,6 +15,7 @@ import pl.kubieniec.repository.OrderRepository;
 import pl.kubieniec.service.OfferService;
 
 import javax.validation.Valid;
+import java.util.Iterator;
 
 @Controller
 @RequestMapping("/logged/offer")
