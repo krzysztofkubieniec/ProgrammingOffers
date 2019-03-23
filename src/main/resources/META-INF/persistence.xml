@@ -6,12 +6,12 @@
     <persistence-unit name="programmingOffersPersistenceUnit">
         <properties>
             <property name="javax.persistence.jdbc.url"
-            value="jdbc:mysql://localhost:3306/programming_offers?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />
+            value="jdbc:mysql://programmingoffers.cxk9wgz7s5d6.eu-west-1.rds.amazonaws.com/programmingoffers" />
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="czopek"/>
+            <property name="javax.persistence.jdbc.password" value="kubieniec123"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.schema-generation.database.action"
-                      value="drop-and-create"/>
+                      value="none"/>
             <property name="hibernate.dialect"
                       value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.connection.useUnicode" value="true"/>
@@ -19,15 +19,7 @@
             <property name="hibernate.connection.CharSet" value="utf8"/>
             <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
             <property name="javax.persistence.schema-generation.drop-source" value="metadata"/>
-            <property name="javax.persistence.sql-load-script-source" value="SQL/initial.sql"/>
+            <!--<property name="javax.persistence.sql-load-script-source" value="SQL/initial.sql"/>-->
         </properties>
     </persistence-unit>
 </persistence>
-
-
-        <!--<property name="javax.persistence.jdbc.url"-->
-        <!--value="jdbc:mysql://programming-offers.cxk9wgz7s5d6.eu-west-1.rds.amazonaws.com:3306/programmingoffer" />-->
-
-
-        <!--<property name="javax.persistence.jdbc.url"-->
-        <!--value="jdbc:mysql://localhost:3306/programming_offers?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC" />-->
