@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.kubieniec.model.*;
 import pl.kubieniec.repository.CategoryRepository;
@@ -16,6 +15,7 @@ import pl.kubieniec.repository.TechnologyRepository;
 import pl.kubieniec.service.OrderService;
 import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -54,7 +54,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/logged/create-order", method = RequestMethod.POST)
-    public String add(@Validated({CreatingAndUpdateingOrder.class}) Order order, BindingResult result, @SessionAttribute String login) {
+    public String add(@Valid Order order, BindingResult result, @SessionAttribute String login) {
         if (result.hasErrors()) {
             return "/order/create-order";
         }
@@ -73,7 +73,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/logged/edit/{id}", method = RequestMethod.POST)
-    public String update(@Validated({CreatingAndUpdateingOrder.class}) Order order, BindingResult result) {
+    public String update(@Valid Order order, BindingResult result) {
         if (result.hasErrors()) {
             return "/order/create-order";
         }

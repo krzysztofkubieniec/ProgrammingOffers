@@ -5,7 +5,6 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -48,7 +47,7 @@ public class User {
     private String lastName;
 
     @Column(name = "about_me")
-    @NotBlank(groups = CreatingAndUpdateingOrder.class)
+    @NotBlank
     private String aboutMe;
 
     @Column(name = "phone_number")

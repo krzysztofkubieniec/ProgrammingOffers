@@ -45,6 +45,9 @@
                     <form:hidden path="updated"/>
                     <input type="submit" class="btn btn-primary" value="Wyślij"/>
                 </div>
+                <div class="form-group">
+                        ${error}
+                </div>
             </div>
         </div>
         </form:form>
