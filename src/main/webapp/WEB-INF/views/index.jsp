@@ -166,13 +166,16 @@
                                 <li class="page-item active">
                                     <input id="c0" type="radio" class="page-link" name="page" value="0" checked/>
                                     <label for="c0" class="page-link form-control">1</label>
-                                    <span class="sr-only">(current)</span></li>
-                                <c:forEach var="i" begin="1" end="${lastPageNo-1}">
-                                    <li class="page-item">
-                                        <input id="c${i}" type="radio" class="page-link" name="page" value="${i}"/>
-                                        <label for="c${i}" class="page-link form-control">${i+1}</label>
-                                    </li>
-                                </c:forEach>
+                                    <span class="sr-only">(current)</span>
+                                </li>
+                                <c:if test="${lastPageNo > 0}">
+                                    <c:forEach var="i" begin="1" end="${lastPageNo-1}">
+                                        <li class="page-item">
+                                            <input id="c${i}" type="radio" class="page-link" name="page" value="${i}"/>
+                                            <label for="c${i}" class="page-link form-control">${i+1}</label>
+                                        </li>
+                                    </c:forEach>
+                                </c:if>
                             </ul>
                         </form>
                     </div>
