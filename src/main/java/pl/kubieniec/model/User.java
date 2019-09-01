@@ -46,7 +46,8 @@ public class User {
     @NotBlank
     private String lastName;
 
-    @Column(name = "about_me")
+    @Column(name = "about_me", length = 1000)
+    @Size(max = 1000)
     @NotBlank
     private String aboutMe;
 

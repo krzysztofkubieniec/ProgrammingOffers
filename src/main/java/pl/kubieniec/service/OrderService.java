@@ -71,7 +71,7 @@ public class OrderService {
     }
 
     public void end(Long id) {
-        Long time = Calendar.getInstance().getTime().getTime() - 1000;
+        Long time = Calendar.getInstance().getTime().getTime();
         orderRepository.findOne(id).setEnd(new Date(time));
     }
 
