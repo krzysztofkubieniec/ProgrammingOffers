@@ -6,9 +6,9 @@
     <persistence-unit name="programmingOffersPersistenceUnit">
         <properties>
             <property name="javax.persistence.jdbc.url"
-            value="jdbc:mysql://aa1ucvl6w9isafu.cxk9wgz7s5d6.eu-west-1.rds.amazonaws.com/programmingoffers" />
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="kubieniec123"/>
+            value="jdbc:mysql://mitsubishi.cxk9wgz7s5d6.eu-west-1.rds.amazonaws.com:3306/programmingoffers" />
+            <property name="javax.persistence.jdbc.user" value="***"/>
+            <property name="javax.persistence.jdbc.password" value="***"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.schema-generation.database.action"
                       value="none"/>
@@ -19,7 +19,7 @@
             <property name="hibernate.connection.CharSet" value="utf8"/>
             <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
             <property name="javax.persistence.schema-generation.drop-source" value="metadata"/>
-            <!--<property name="javax.persistence.sql-load-script-source" value="SQL/initial.sql"/>-->
+            <property name="javax.persistence.sql-load-script-source" value="SQL/initial.sql"/>
         </properties>
     </persistence-unit>
 </persistence>
