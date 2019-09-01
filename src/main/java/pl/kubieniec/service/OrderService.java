@@ -34,26 +34,26 @@ public class OrderService {
     static final int PAGE_SIZE = 5;
 
     public List<Order> findActiveOrdersByUser(User user) {
-        return orderRepository.findAllByEndAfterAndEmployerOrderByEndAsc(new Date(), user);
+        return orderRepository.findAllByDeletedAndEmployerOrderByEndAsc(false, user);
     }
 
     public List<Order> findNonActiveOrdersByUser(User user) {
-        return orderRepository.findAllByEndBeforeAndEmployerOrderByEndDesc(new Date(), user);
+        return orderRepository.findAllByDeletedAndEmployerOrderByEndDesc(true, user);
     }
 
     public Page<Order> filter(List<Category> categories, List<Technology> technologies, String search, String pageStr) {
         int page = Integer.parseInt(pageStr);
         search = ("".equals(search)) ? "%" : search;
         if (categories == null && technologies == null) {
-            return orderRepository.findByEndAfterAndTitleContaining(new Date(), search, gotoPage(page));
+            return orderRepository.findByDeletedAndTitleContaining(false, search, gotoPage(page));
         }
         if (categories != null && technologies == null) {
-            return orderRepository.findByEndAfterAndCategoriesInAndTitleContaining(new Date(), categories, search, gotoPage(page));
+            return orderRepository.findByDeletedAndCategoriesInAndTitleContaining(false, categories, search, gotoPage(page));
         }
-        if (categories == null && technologies != null) {
-            return orderRepository.findByEndAfterAndTechnologiesInAndTitleContaining(new Date(), technologies, search, gotoPage(page));
+        if (categories == null) {
+            return orderRepository.findByDeletedAndTechnologiesInAndTitleContaining(false, technologies, search, gotoPage(page));
         }
-        return orderRepository.findByEndAfterAndCategoriesInAndTechnologiesInAndTitleContaining(new Date(), categories, technologies, search, gotoPage(page));
+        return orderRepository.findByDeletedAndCategoriesInAndTechnologiesInAndTitleContaining(false, categories, technologies, search, gotoPage(page));
     }
 
     public void save(Order order, String login) {
@@ -71,8 +71,10 @@ public class OrderService {
     }
 
     public void end(Long id) {
-        Long time = Calendar.getInstance().getTime().getTime();
-        orderRepository.findOne(id).setEnd(new Date(time));
+        Order order = orderRepository.findOne(id);
+        long time = Calendar.getInstance().getTime().getTime() + 1000;
+        order.setEnd(new Date(time));
+        order.setDeleted(true);
     }
 
     public Boolean validateOrderByUser(String login, Long orderId) {
@@ -91,7 +93,7 @@ public class OrderService {
 
     public List<Order> ordersOnPage(String pageNo) {
         int gotoPageNo = Integer.parseInt(pageNo);
-        List<Order> orders = orderRepository.findAllByEndAfter(new Date(), gotoPage(gotoPageNo));
+        List<Order> orders = orderRepository.findAllByDeleted(false, gotoPage(gotoPageNo));
         return orders;
     }
 

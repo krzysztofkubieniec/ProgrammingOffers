@@ -16,17 +16,17 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     int countByEndAfter(Date date);
 
-    List<Order> findAllByEndAfter(Date date, Pageable pageable);
+    List<Order> findAllByDeleted(Boolean deleted, Pageable pageable);
 
-    Page<Order> findByEndAfterAndTitleContaining(Date date, String title, Pageable pageable);
+    Page<Order> findByDeletedAndTitleContaining(Boolean deleted, String title, Pageable pageable);
 
-    List<Order> findAllByEndAfterAndEmployerOrderByEndAsc(Date date, User employer);
+    List<Order> findAllByDeletedAndEmployerOrderByEndAsc(Boolean deleted, User employer);
 
-    List<Order> findAllByEndBeforeAndEmployerOrderByEndDesc(Date date, User employer);
+    List<Order> findAllByDeletedAndEmployerOrderByEndDesc(Boolean deleted, User employer);
 
-    Page<Order> findByEndAfterAndCategoriesInAndTechnologiesInAndTitleContaining(Date date, List<Category> categories, List<Technology> technologies, String title, Pageable pageable);
+    Page<Order> findByDeletedAndCategoriesInAndTechnologiesInAndTitleContaining(Boolean deleted, List<Category> categories, List<Technology> technologies, String title, Pageable pageable);
 
-    Page<Order> findByEndAfterAndCategoriesInAndTitleContaining(Date date, List<Category> categories, String title, Pageable pageable);
+    Page<Order> findByDeletedAndCategoriesInAndTitleContaining(Boolean deleted, List<Category> categories, String title, Pageable pageable);
 
-    Page<Order> findByEndAfterAndTechnologiesInAndTitleContaining(Date date, List<Technology> technologies, String title, Pageable pageable);
+    Page<Order> findByDeletedAndTechnologiesInAndTitleContaining(Boolean deleted, List<Technology> technologies, String title, Pageable pageable);
 }

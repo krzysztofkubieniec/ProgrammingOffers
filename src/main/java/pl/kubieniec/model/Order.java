@@ -1,6 +1,7 @@
 package pl.kubieniec.model;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
@@ -42,6 +43,8 @@ public class Order {
     @NotNull
     private Date end;
 
+    private Boolean deleted;
+
     @ManyToOne
     @JoinColumn(name = "employer_id")
     private User employer;
@@ -74,5 +77,15 @@ public class Order {
         return content;
     }
 
+    @PrePersist
+    void preInsert() {
+        if (this.deleted == null)
+            this.deleted = false;
+    }
+
+    @PreUpdate
+    void preUpdate() {
+        preInsert();
+    }
 
 }
