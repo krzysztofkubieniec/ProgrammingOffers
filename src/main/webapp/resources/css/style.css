@@ -170,20 +170,19 @@ input.search::-webkit-input-placeholder {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-    position: relative;
-    min-height: 100%;
+html, body {
+  height: 100%;
 }
-
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
 }
-
+.body-wrapper {
+  flex: 1 0 auto;
+}
 .footer {
-    position: absolute;
-    width: 100%;
-    background-color: #f5f5f5;
+  flex-shrink: 0;
+  background-color: #f5f5f5;
 }
 
 /* Custom page CSS

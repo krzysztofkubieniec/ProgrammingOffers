@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<div class="container">
+<div class="container body-wrapper">
 	<div class="mx-auto p-3 mt-5 text-center bg-light rounded-custom">
 		<div class="rounded-custom mx-auto">
 			<h3>${order.title}</h3>
@@ -114,7 +114,7 @@
 				<div class="form-group">
 					<div class="row col-4">
 						<label>Kwota (nie wymagane): </label>
-						<form:input cssClass="col-4" path="price"/>
+						<form:input cssClass="col-4" path="price" type="number"/>
 					</div>
 					<label>Wiadomość:</label>
 					<form:textarea cssClass="form-control" rows="8" cols="50" path="message"/>

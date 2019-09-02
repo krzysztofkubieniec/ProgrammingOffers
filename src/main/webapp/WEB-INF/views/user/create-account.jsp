@@ -7,7 +7,7 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<div class="container">
+<div class="container body-wrapper">
     <div class="row">
         <div class="mx-auto p-5 my-5 bg-light text-center">
             <h2 class="mb-5">Rejestracja</h2>

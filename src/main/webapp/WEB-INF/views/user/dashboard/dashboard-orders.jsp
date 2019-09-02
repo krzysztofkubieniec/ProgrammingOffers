@@ -9,7 +9,7 @@
 </head>
 <body>
 <%@ include file="../../header.jsp" %>
-<div class="wrapper">
+<div class="wrapper body-wrapper">
     <nav id="sidebar">
         <ul class="list-unstyled components borderless">
             <li class="active">

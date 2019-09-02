@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
-<div class="container">
+<div class="container body-wrapper">
     <%--<div class="row mx-5 mt-5">--%>
     <%--<div class="d-flex flex-column col-6">--%>
     <%--<a class="btn btn-success btn-lg btn-block"--%>

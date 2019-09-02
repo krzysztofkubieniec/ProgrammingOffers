@@ -48,7 +48,6 @@ public class User {
 
     @Column(name = "about_me", length = 1000)
     @Size(max = 1000)
-    @NotBlank
     private String aboutMe;
 
     @Column(name = "phone_number")
