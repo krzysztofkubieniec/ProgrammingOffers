@@ -1,19 +1,14 @@
 package pl.kubieniec.app;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.web.PageableArgumentResolver;
-import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
-import pl.kubieniec.converter.CategoryConverter;
-import pl.kubieniec.converter.DateConverter;
-import pl.kubieniec.converter.TechnologyConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleContextResolver;
@@ -23,10 +18,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import pl.kubieniec.converter.CategoryConverter;
+import pl.kubieniec.converter.DateConverter;
+import pl.kubieniec.converter.TechnologyConverter;
 
 import javax.persistence.EntityManagerFactory;
 import javax.validation.Validator;
-import java.util.List;
 import java.util.Locale;
 
 @Configuration
@@ -34,6 +31,8 @@ import java.util.Locale;
 @ComponentScan(basePackages = "pl.kubieniec")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "pl.kubieniec.repository")
+@EnableScheduling
+@PropertySource(value = "classpath:application.properties")
 public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Bean

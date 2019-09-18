@@ -6,7 +6,6 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -43,7 +42,7 @@ public class Order {
     @NotNull
     private Date end;
 
-    private Boolean deleted;
+    private boolean deleted;
 
     @ManyToOne
     @JoinColumn(name = "employer_id")
@@ -76,16 +75,4 @@ public class Order {
         }
         return content;
     }
-
-    @PrePersist
-    void preInsert() {
-        if (this.deleted == null)
-            this.deleted = false;
-    }
-
-    @PreUpdate
-    void preUpdate() {
-        preInsert();
-    }
-
 }

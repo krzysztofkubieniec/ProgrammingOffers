@@ -13,7 +13,6 @@ import pl.kubieniec.repository.OfferRepository;
 import pl.kubieniec.repository.OrderRepository;
 import pl.kubieniec.repository.TechnologyRepository;
 import pl.kubieniec.service.OrderService;
-import pl.kubieniec.validate.CreatingAndUpdateingOrder;
 
 import javax.validation.Valid;
 import java.util.List;
