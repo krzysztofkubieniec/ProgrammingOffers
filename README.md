@@ -1,5 +1,5 @@
 # ProgrammingOffers
-Web app for writing-code offers (http://programmingoffers.pl). Work in progress.
+Web app for writing-code offers (http://programmingoffers.pl).
 
 TECHNOLOGIES: JAVA, SPRING DATA, JPA, HIBERNATE, AJAX, JSP, JS, JQUERY, MYSQL, REST API, MAVEN
 
